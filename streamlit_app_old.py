@@ -108,7 +108,7 @@ def get_snowflake_session() -> Session:
     try:
         sess = get_active_session()
         if sess is not None:
-            logger.info("✅ Using active Snowflake session from Streamlit in Snowflake")
+            logger.info(" Using active Snowflake session from Streamlit in Snowflake")
 
             # For Streamlit in Snowflake, use the current session context as-is
             # Context overrides are optional and only used for local development
@@ -126,7 +126,7 @@ def get_snowflake_session() -> Session:
         missing = [k for k in required if not cfg.get(k)]
         if missing:
             error_msg = (
-                "❌ Snowflake session not available. For Streamlit in Snowflake, no configuration needed. "
+                " Snowflake session not available. For Streamlit in Snowflake, no configuration needed. "
                 "For local development, missing secrets: " + ", ".join(missing)
             )
             logger.error(error_msg)
@@ -135,7 +135,7 @@ def get_snowflake_session() -> Session:
         if "secrets" in str(e).lower():
             # More helpful error for missing secrets files
             error_msg = (
-                "❌ Running outside Streamlit in Snowflake and no secrets configured. "
+                " Running outside Streamlit in Snowflake and no secrets configured. "
                 "Either run in Streamlit in Snowflake (no config needed) or configure local secrets."
             )
             logger.error(error_msg)
@@ -1528,61 +1528,61 @@ def get_climate_risk_locations() -> pd.DataFrame:
 
 st.set_page_config(
     page_title="BFSI Wealth 360 – Analytics",
-    page_icon="💹",
+    page_icon=None,
     layout="wide",
 )
 
-st.title("🏦 BFSI Wealth 360 – Advanced Analytics Platform")
+st.title(" BFSI Wealth 360 – Advanced Analytics Platform")
 st.caption(
-    "🚀 Powered by Snowflake | Schema: FSI_DEMOS.WEALTH_360 | 12 Advanced Use Cases"
+    " Powered by Snowflake | Schema: FSI_DEMOS.WEALTH_360 | 12 Advanced Use Cases"
 )
 
 # Use Case Overview
 with st.expander(
-    "📋 **Use Case Catalog** - Click to see all 12 advanced capabilities",
+    " **Use Case Catalog** - Click to see all 12 advanced capabilities",
     expanded=False,
 ):
     st.markdown(
         """
     | Use Case | Why It Matters | Key Tables | KPIs | Complexity/TTV |
     |----------|----------------|------------|------|----------------|
-    | 🎯 **Customer 360 & Segmentation** | Single view across balances, portfolios, behavior | CLIENTS, ACCOUNTS, ACCOUNT_HISTORY, TRANSACTIONS, PORTFOLIOS | AUM/NTB growth, segment coverage, data freshness | Low / 1–2 wks |
-    | 🎁 **Next Best Action (cross/upsell)** | Recommend card/loan/insurance/portfolio actions | CLIENTS, TRANSACTIONS, INTERACTIONS, PORTFOLIOS | Offer CTR, conversion, AUM lift | Med / 2–4 wks |
-    | ⚠️ **Attrition/Churn Early Warning** | Catch balance flight & engagement drop | ACCOUNT_HISTORY, INTERACTIONS, ADVISOR_CLIENT_RELATIONSHIPS | Churn rate, save rate, time-to-contact | Med / 2–4 wks |
-    | ⚖️ **Suitability & Risk Drift Alerts** | Ensure portfolio aligns to risk tolerance | CLIENTS (RISK_TOLERANCE), PORTFOLIOS, POSITION_HISTORY | Suitability breaches, time-to-remediate | Med / 3–5 wks |
-    | 📊 **Portfolio Drift & Rebalance** | Alert on asset-class drift vs strategy | PORTFOLIOS, POSITION_HISTORY | Drift % over threshold, rebalance yield | Med / 3–5 wks |
-    | 💰 **Idle Cash / Cash-Sweep** | Monetize idle balances | ACCOUNT_HISTORY, POSITION_HISTORY | Cash ratio, NII uplift | Low / 1–2 wks |
-    | 🔍 **Trade & Transaction Anomaly Detection** | Catch unusual patterns and operational outliers | TRANSACTIONS | Transaction integrity, operational risk detection | Med / 2–4 wks |
-    | 👥 **Advisor Productivity & Coverage** | Improve book management & cadences | ADVISOR_CLIENT_RELATIONSHIPS, INTERACTIONS | Coverage %, last-contact SLA, meetings/client | Low / 1–2 wks |
-    | 📅 **Event-Driven Outreach** | Timely, contextual nudge at life/market events | CLIENTS (LIFE_EVENT), MARKET_EVENTS, INTERACTIONS | Engagement rate, booked meetings | Low / 1–2 wks |
-    | 💬 **Complaint/Sentiment Intelligence** | Mine notes for issues & intent | INTERACTIONS (OUTCOME_NOTES, LLM_GENERATED_CONTENT) | NPS proxy, time-to-resolution | Low / 1–2 wks |
-    | 🤖 **Wealth Narrative & Client Briefing** | Auto-generate client summaries & talking points | CLIENTS, PORTFOLIOS, POSITION_HISTORY, INTERACTIONS | Prep time saved, call quality score | Low / 1–2 wks |
-    | 📋 **KYB/KYC Ops Copilot** | Speed up checks & documentation Q&A | CLIENTS/ACCOUNTS + external docs | Cycle time, touchless rate | Med / 3–6 wks |
-    | 🌍 **Geospatial Analytics & Climate Risk** | Location-based insights and weather risk analysis | CLIENTS + Weather/POI data | Geographic AUM distribution, climate exposure | Med / 3–5 wks |
+    | **Customer 360 & Segmentation** | Single view across balances, portfolios, behavior | CLIENTS, ACCOUNTS, ACCOUNT_HISTORY, TRANSACTIONS, PORTFOLIOS | AUM/NTB growth, segment coverage, data freshness | Low / 1–2 wks |
+    | **Next Best Action (cross/upsell)** | Recommend card/loan/insurance/portfolio actions | CLIENTS, TRANSACTIONS, INTERACTIONS, PORTFOLIOS | Offer CTR, conversion, AUM lift | Med / 2–4 wks |
+    | **Attrition/Churn Early Warning** | Catch balance flight & engagement drop | ACCOUNT_HISTORY, INTERACTIONS, ADVISOR_CLIENT_RELATIONSHIPS | Churn rate, save rate, time-to-contact | Med / 2–4 wks |
+    | **Suitability & Risk Drift Alerts** | Ensure portfolio aligns to risk tolerance | CLIENTS (RISK_TOLERANCE), PORTFOLIOS, POSITION_HISTORY | Suitability breaches, time-to-remediate | Med / 3–5 wks |
+    | **Portfolio Drift & Rebalance** | Alert on asset-class drift vs strategy | PORTFOLIOS, POSITION_HISTORY | Drift % over threshold, rebalance yield | Med / 3–5 wks |
+    | **Idle Cash / Cash-Sweep** | Monetize idle balances | ACCOUNT_HISTORY, POSITION_HISTORY | Cash ratio, NII uplift | Low / 1–2 wks |
+    | **Trade & Transaction Anomaly Detection** | Catch unusual patterns and operational outliers | TRANSACTIONS | Transaction integrity, operational risk detection | Med / 2–4 wks |
+    | **Advisor Productivity & Coverage** | Improve book management & cadences | ADVISOR_CLIENT_RELATIONSHIPS, INTERACTIONS | Coverage %, last-contact SLA, meetings/client | Low / 1–2 wks |
+    | **Event-Driven Outreach** | Timely, contextual nudge at life/market events | CLIENTS (LIFE_EVENT), MARKET_EVENTS, INTERACTIONS | Engagement rate, booked meetings | Low / 1–2 wks |
+    | **Complaint/Sentiment Intelligence** | Mine notes for issues & intent | INTERACTIONS (OUTCOME_NOTES, LLM_GENERATED_CONTENT) | NPS proxy, time-to-resolution | Low / 1–2 wks |
+    | **Wealth Narrative & Client Briefing** | Auto-generate client summaries & talking points | CLIENTS, PORTFOLIOS, POSITION_HISTORY, INTERACTIONS | Prep time saved, call quality score | Low / 1–2 wks |
+    | **KYB/KYC Ops Copilot** | Speed up checks & documentation Q&A | CLIENTS/ACCOUNTS + external docs | Cycle time, touchless rate | Med / 3–6 wks |
+    | **Geospatial Analytics & Climate Risk** | Location-based insights and weather risk analysis | CLIENTS + Weather/POI data | Geographic AUM distribution, climate exposure | Med / 3–5 wks |
     """
     )
     st.info(
-        "💡 **Navigate through the tabs below to explore each use case with live data and interactive analytics.**"
+        " **Navigate through the tabs below to explore each use case with live data and interactive analytics.**"
     )
 
 # Enhanced Sidebar with Navigation and Analytics
 with st.sidebar:
-    st.markdown("## 🏦 **Wealth 360** Control Center")
+    st.markdown("## **Wealth 360** Control Center")
 
     # Validate connection silently
     try:
         session = get_snowflake_session()
     except Exception as e:
-        st.error("❌ **Snowflake Connection Failed**")
+        st.error(" **Snowflake Connection Failed**")
         error_str = str(e)
         if "secrets" in error_str.lower() or "no configuration needed" in error_str:
             st.info(
                 """
-            **🚀 For Streamlit in Snowflake:**
+           ** For Streamlit in Snowflake:**
             - No configuration needed!
             - Try refreshing the page.
 
-            **💻 For Local Development:**
+           ** For Local Development:**
             - Configure `.streamlit/secrets.toml`
             """
             )
@@ -1591,15 +1591,15 @@ with st.sidebar:
         st.stop()
 
     # Navigation Helper
-    st.markdown("### 🧭 **Navigation Guide**")
+    st.markdown("### **Navigation Guide**")
     nav_selection = st.selectbox(
         "Quick Navigation:",
         [
-            "📊 Executive Dashboard",
-            "👥 Client Analytics",
-            "🎯 Portfolio Management",
-            "🤖 AI & Automation",
-            "🌍 Geographic Insights",
+            " Executive Dashboard",
+            " Client Analytics",
+            " Portfolio Management",
+            " AI & Automation",
+            " Geographic Insights",
         ],
     )
 
@@ -1608,24 +1608,24 @@ with st.sidebar:
     st.divider()
 
     # Global Filters
-    st.markdown("### ⚙️ **Global Filters**")
+    st.markdown("### **Global Filters**")
 
     # Wealth Segments
     wealth_segments = st.multiselect(
-        "💰 Wealth Segments:",
+        " Wealth Segments:",
         ["Ultra HNW", "Very HNW", "HNW", "Emerging HNW", "Mass Affluent"],
         default=["Ultra HNW", "Very HNW", "HNW"],
     )
 
     # Risk Tolerance
     risk_tolerance = st.multiselect(
-        "⚖️ Risk Tolerance:",
+        " Risk Tolerance:",
         ["Conservative", "Moderate", "Balanced", "Growth", "Aggressive Growth"],
         default=["Conservative", "Moderate", "Balanced", "Growth", "Aggressive Growth"],
     )
 
     # Time Windows
-    st.markdown("**📅 Time Windows:**")
+    st.markdown("** Time Windows:**")
     col1, col2 = st.columns(2)
     with col1:
         engagement_days = st.number_input(
@@ -1637,9 +1637,9 @@ with st.sidebar:
         )
 
     # Thresholds
-    st.markdown("**🎯 Thresholds:**")
+    st.markdown("** Thresholds:**")
     hnw_threshold = st.number_input(
-        "💰 HNW Minimum (USD)",
+        " HNW Minimum (USD)",
         min_value=100000,
         value=1_000_000,
         step=100000,
@@ -1647,41 +1647,41 @@ with st.sidebar:
     )
 
     concentration_pct = st.slider(
-        "📊 Concentration Alert (%)", min_value=5, max_value=80, value=30, step=5
+        " Concentration Alert (%)", min_value=5, max_value=80, value=30, step=5
     )
 
     st.divider()
 
     # Quick Actions
-    st.markdown("### ⚡ **Quick Actions**")
+    st.markdown("### **Quick Actions**")
 
-    if st.button("📈 Generate Executive Report", use_container_width=True):
-        st.info("📋 Executive report generated!")
+    if st.button("Generate Executive Report", use_container_width=True):
+        st.info(" Executive report generated!")
 
-    if st.button("🚨 Check Alerts", use_container_width=True):
-        st.warning("⚠️ 23 items need attention")
+    if st.button("Check Alerts", use_container_width=True):
+        st.warning(" 23 items need attention")
 
-    if st.button("🔄 Refresh All Data", use_container_width=True):
-        st.success("✅ Data refreshed!")
+    if st.button("Refresh All Data", use_container_width=True):
+        st.success(" Data refreshed!")
 
     st.divider()
 
     # Analytics Summary
-    st.markdown("### 📊 **Quick Stats**")
+    st.markdown("### **Quick Stats**")
     try:
         # Get some quick stats
         quick_stats = get_global_kpis()
         if quick_stats and len(quick_stats) > 0:
-            st.metric("👥 Total Clients", f"{quick_stats.get('num_clients', 'N/A'):,}")
-            st.metric("💰 Total AUM", f"${quick_stats.get('aum', 0):,.0f}")
+            st.metric("Total Clients", f"{quick_stats.get('num_clients', 'N/A'):,}")
+            st.metric("Total AUM", f"${quick_stats.get('aum', 0):,.0f}")
             avg_portfolio = quick_stats.get("aum", 0) / max(
                 quick_stats.get("num_clients", 1), 1
             )
-            st.metric("📈 Avg Portfolio", f"${avg_portfolio:,.0f}")
+            st.metric("Avg Portfolio", f"${avg_portfolio:,.0f}")
         else:
-            st.info("📊 Loading analytics...")
+            st.info(" Loading analytics...")
     except Exception:
-        st.info("📊 Quick stats unavailable")
+        st.info(" Quick stats unavailable")
 
     # Convert to global variables for use in tabs
     low_engagement_days = engagement_days
@@ -1693,20 +1693,20 @@ with st.sidebar:
 # Consolidated Tab Structure - Reduced from 13 to 5 logical groups
 tabs = st.tabs(
     [
-        "📊 Executive Dashboard",
-        "👥 Client Analytics",
-        "🎯 Portfolio Management",
-        "🤖 AI & Automation",
-        "🌍 Geographic Insights",
+        " Executive Dashboard",
+        " Client Analytics",
+        " Portfolio Management",
+        " AI & Automation",
+        " Geographic Insights",
     ]
 )
 
 
-# 📊 Executive Dashboard - High-level KPIs and alerts
+#  Executive Dashboard - High-level KPIs and alerts
 with tabs[0]:
-    st.markdown("## 📊 Executive Dashboard")
+    st.markdown("## Executive Dashboard")
     st.caption(
-        "🚀 **Real-time insights and key performance indicators across all business areas**"
+        " **Real-time insights and key performance indicators across all business areas**"
     )
 
     # Global KPIs Row
@@ -1717,29 +1717,29 @@ with tabs[0]:
         col1, col2, col3, col4, col5 = st.columns(5)
         with col1:
             st.metric(
-                "👥 Total Clients",
+                " Total Clients",
                 f"{kpi_data.get('num_clients', 0):,}",
                 delta="+127 this month",
             )
         with col2:
-            st.metric("💰 Total AUM", f"${kpi_data.get('aum', 0):,.0f}", delta="+2.3%")
+            st.metric("Total AUM", f"${kpi_data.get('aum', 0):,.0f}", delta="+2.3%")
         with col3:
             avg_portfolio = kpi_data.get("aum", 0) / max(
                 kpi_data.get("num_clients", 1), 1
             )
             st.metric(
-                "📈 Avg Portfolio",
+                " Avg Portfolio",
                 f"${avg_portfolio:,.0f}",
                 delta="+5.7%",
             )
         with col4:
             st.metric(
-                "👨‍💼 Total Advisors",
+                " Total Advisors",
                 f"{kpi_data.get('num_advisors', 0):,}",
                 delta="Active advisors",
             )
         with col5:
-            st.metric("🎯 Engagement Rate", "87.3%", delta="+3.2%")
+            st.metric("Engagement Rate", "87.3%", delta="+3.2%")
 
     st.divider()
 
@@ -1747,13 +1747,13 @@ with tabs[0]:
     col1, col2 = st.columns([2, 1])
 
     with col1:
-        st.markdown("### 🚨 **Priority Alerts & Actions**")
+        st.markdown("### **Priority Alerts & Actions**")
 
         # High Priority Items
         alert_col1, alert_col2 = st.columns(2)
 
         with alert_col1:
-            st.error("**🔴 Critical Alerts (7)**")
+            st.error("** Critical Alerts (7)**")
             st.markdown(
                 """
             - 3x Concentration breaches >30%
@@ -1775,10 +1775,10 @@ with tabs[0]:
             )
 
     with col2:
-        st.markdown("### 📈 **Quick Insights**")
+        st.markdown("### **Quick Insights**")
 
         # Top performers
-        st.success("**🏆 Top Performing Segments**")
+        st.success("** Top Performing Segments**")
         st.markdown(
             """
         1. **Ultra HNW**: +12.7% AUM growth
@@ -1787,7 +1787,7 @@ with tabs[0]:
         """
         )
 
-        st.info("**🎯 Opportunities**")
+        st.info("** Opportunities**")
         st.markdown(
             """
         - **$47M** in idle cash to sweep
@@ -1799,28 +1799,28 @@ with tabs[0]:
     st.divider()
 
     # Quick Action Panels
-    st.markdown("### ⚡ **Today's Action Items**")
+    st.markdown("### **Today's Action Items**")
 
     action_col1, action_col2, action_col3 = st.columns(3)
 
     with action_col1:
-        st.markdown("**🎯 Client Outreach (Next 5)**")
-        if st.button("📞 Contact High-Priority Clients", use_container_width=True):
-            st.success("✅ Outreach list generated!")
+        st.markdown("**Client Outreach (Next 5)**")
+        if st.button("Contact High-Priority Clients", use_container_width=True):
+            st.success(" Outreach list generated!")
 
     with action_col2:
-        st.markdown("**📊 Portfolio Reviews (Today)**")
-        if st.button("⚖️ Review Risk Drifts", use_container_width=True):
-            st.info("📋 Risk assessment report ready!")
+        st.markdown("**Portfolio Reviews (Today)**")
+        if st.button("Review Risk Drifts", use_container_width=True):
+            st.info(" Risk assessment report ready!")
 
     with action_col3:
-        st.markdown("**🤖 AI Recommendations**")
-        if st.button("🧠 Generate Next Best Actions", use_container_width=True):
-            st.success("🎁 AI recommendations updated!")
+        st.markdown("**AI Recommendations**")
+        if st.button("Generate Next Best Actions", use_container_width=True):
+            st.success(" AI recommendations updated!")
 
     # Executive Summary Charts
     st.divider()
-    st.markdown("### 📊 **Executive Summary Charts**")
+    st.markdown("### **Executive Summary Charts**")
 
     summary_col1, summary_col2 = st.columns(2)
 
@@ -1841,7 +1841,7 @@ with tabs[0]:
             aum_trend,
             x="Month",
             y="AUM",
-            title="📈 AUM Growth Trend (YTD)",
+            title=" AUM Growth Trend (YTD)",
             labels={"AUM": "AUM ($ Millions)"},
         )
         st.plotly_chart(fig_trend, use_container_width=True)
@@ -1855,14 +1855,14 @@ with tabs[0]:
             fig_segments = px.pie(
                 values=segment_counts.values,
                 names=segment_counts.index,
-                title="🎯 Client Distribution by Wealth Segment",
+                title=" Client Distribution by Wealth Segment",
             )
             st.plotly_chart(fig_segments, use_container_width=True)
 
 
-# 🎁 Next Best Action (Cross/Upsell)
+#  Next Best Action (Cross/Upsell)
 with tabs[1]:
-    st.subheader("🎁 Next Best Action - Cross/Upsell Recommendations")
+    st.subheader(" Next Best Action - Cross/Upsell Recommendations")
     st.caption(
         "Recommend card/loan/insurance/portfolio actions | KPIs: Offer CTR, conversion, AUM lift"
     )
@@ -1876,7 +1876,7 @@ with tabs[1]:
         col2.metric("Medium Priority", priority_counts.get("Medium", 0))
         col3.metric("Low Priority", priority_counts.get("Low", 0))
 
-        st.subheader("🎯 Recommended Actions")
+        st.subheader(" Recommended Actions")
         st.dataframe(nba_df, use_container_width=True)
 
         # Revenue impact
@@ -1893,9 +1893,9 @@ with tabs[1]:
         st.info("No recommendations available.")
 
 
-# ⚠️ Attrition/Churn Early Warning
+#  Attrition/Churn Early Warning
 with tabs[2]:
-    st.subheader("⚠️ Attrition/Churn Early Warning")
+    st.subheader(" Attrition/Churn Early Warning")
     st.caption(
         "Catch balance flight & engagement drop | KPIs: Churn rate, save rate, time-to-contact"
     )
@@ -1905,10 +1905,10 @@ with tabs[2]:
         # Risk distribution
         risk_counts = churn_df["CHURN_RISK"].value_counts()
         col1, col2 = st.columns(2)
-        col1.metric("🔴 High Risk", risk_counts.get("High Risk", 0))
+        col1.metric(" High Risk", risk_counts.get("High Risk", 0))
         col2.metric("🟡 Medium Risk", risk_counts.get("Medium Risk", 0))
 
-        st.subheader("⚠️ At-Risk Clients")
+        st.subheader(" At-Risk Clients")
         st.dataframe(churn_df, use_container_width=True)
 
         # Balance change visualization
@@ -1923,12 +1923,12 @@ with tabs[2]:
         )
         st.plotly_chart(fig, use_container_width=True)
     else:
-        st.success("✅ No clients currently at high churn risk.")
+        st.success(" No clients currently at high churn risk.")
 
 
-# ⚖️ Suitability & Risk Drift Alerts
+#  Suitability & Risk Drift Alerts
 with tabs[3]:
-    st.subheader("⚖️ Suitability & Risk Drift Alerts")
+    st.subheader(" Suitability & Risk Drift Alerts")
     st.caption(
         "Ensure portfolio aligns to risk tolerance | KPIs: Suitability breaches, time-to-remediate"
     )
@@ -1936,7 +1936,7 @@ with tabs[3]:
     # Traditional suitability check
     mism = get_suitability_mismatches()
     if not mism.empty:
-        st.subheader("🚨 Suitability Mismatches")
+        st.subheader(" Suitability Mismatches")
         st.dataframe(
             mism[
                 [
@@ -1950,13 +1950,13 @@ with tabs[3]:
             use_container_width=True,
         )
     else:
-        st.success("✅ No suitability mismatches detected.")
+        st.success(" No suitability mismatches detected.")
 
     # Enhanced concentration analysis
     st.divider()
     conc = get_concentration_breaches(threshold_pct=concentration_threshold)
     if not conc.empty:
-        st.subheader("⚠️ Concentration Risk Alerts")
+        st.subheader(" Concentration Risk Alerts")
         st.dataframe(conc, use_container_width=True)
 
         fig = px.bar(
@@ -1968,12 +1968,12 @@ with tabs[3]:
         )
         st.plotly_chart(fig, use_container_width=True)
     else:
-        st.success("✅ No concentration breaches at selected threshold.")
+        st.success(" No concentration breaches at selected threshold.")
 
 
-# 📊 Portfolio Drift & Rebalance
+#  Portfolio Drift & Rebalance
 with tabs[4]:
-    st.subheader("📊 Portfolio Drift & Rebalance")
+    st.subheader(" Portfolio Drift & Rebalance")
     st.caption(
         "Alert on asset-class drift vs strategy | KPIs: Drift % over threshold, rebalance yield"
     )
@@ -1983,11 +1983,11 @@ with tabs[4]:
         # Drift status summary
         drift_counts = drift_df["DRIFT_STATUS"].value_counts()
         col1, col2, col3 = st.columns(3)
-        col1.metric("🔴 High Drift", drift_counts.get("High Drift", 0))
+        col1.metric(" High Drift", drift_counts.get("High Drift", 0))
         col2.metric("🟡 Medium Drift", drift_counts.get("Medium Drift", 0))
-        col3.metric("✅ Within Range", drift_counts.get("Within Range", 0))
+        col3.metric(" Within Range", drift_counts.get("Within Range", 0))
 
-        st.subheader("📊 Asset Allocation Drift Analysis")
+        st.subheader(" Asset Allocation Drift Analysis")
         st.dataframe(drift_df, use_container_width=True)
 
         # Drift visualization
@@ -2006,9 +2006,9 @@ with tabs[4]:
         st.info("No portfolio drift data available.")
 
 
-# 💰 Idle Cash / Cash-Sweep
+#  Idle Cash / Cash-Sweep
 with tabs[5]:
-    st.subheader("💰 Idle Cash / Cash-Sweep Opportunities")
+    st.subheader(" Idle Cash / Cash-Sweep Opportunities")
     st.caption("Monetize idle balances | KPIs: Cash ratio, NII uplift")
 
     cash_df = get_idle_cash_analysis()
@@ -2027,7 +2027,7 @@ with tabs[5]:
         col3.metric("Total Idle Cash", f"${total_idle_cash:,.0f}")
         col4.metric("Potential Annual NII", f"${potential_nii:,.0f}")
 
-        st.subheader("💰 Cash Analysis by Portfolio")
+        st.subheader(" Cash Analysis by Portfolio")
         st.dataframe(cash_df, use_container_width=True)
 
         # Cash percentage distribution
@@ -2042,9 +2042,9 @@ with tabs[5]:
         st.info("No cash sweep opportunities identified.")
 
 
-# 🔍 Trade & Transaction Anomaly Detection
+#  Trade & Transaction Anomaly Detection
 with tabs[6]:
-    st.subheader("🔍 Trade & Transaction Anomaly Detection")
+    st.subheader(" Trade & Transaction Anomaly Detection")
     st.caption(
         "Catch unusual patterns/outliers | KPIs: Transaction integrity, operational risk detection"
     )
@@ -2053,7 +2053,7 @@ with tabs[6]:
     if not anomalies_df.empty:
         # Anomaly type distribution
         anomaly_counts = anomalies_df["ANOMALY_TYPE"].value_counts()
-        st.subheader("🚨 Anomaly Type Distribution")
+        st.subheader(" Anomaly Type Distribution")
         fig = px.pie(
             values=anomaly_counts.values,
             names=anomaly_counts.index,
@@ -2061,7 +2061,7 @@ with tabs[6]:
         )
         st.plotly_chart(fig, use_container_width=True)
 
-        st.subheader("⚠️ Recent Transaction Anomalies")
+        st.subheader(" Recent Transaction Anomalies")
         st.dataframe(anomalies_df, use_container_width=True)
 
         # Transaction analysis
@@ -2076,19 +2076,19 @@ with tabs[6]:
         )
         st.plotly_chart(fig2, use_container_width=True)
     else:
-        st.success("✅ No transaction anomalies detected in the last 90 days.")
+        st.success(" No transaction anomalies detected in the last 90 days.")
 
 
-# 👥 Advisor Productivity & Coverage
+#  Advisor Productivity & Coverage
 with tabs[7]:
-    st.subheader("👥 Advisor Productivity & Coverage")
+    st.subheader(" Advisor Productivity & Coverage")
     st.caption(
         "Improve book management & cadences | KPIs: Coverage %, last-contact SLA, meetings/client"
     )
 
     adv_df = get_advisor_productivity(window_days=advisor_window_days)
     if not adv_df.empty:
-        st.subheader("📊 Advisor Performance Metrics")
+        st.subheader(" Advisor Performance Metrics")
         st.dataframe(adv_df, use_container_width=True)
 
         # AUM by advisor
@@ -2116,9 +2116,9 @@ with tabs[7]:
         st.info("No advisor productivity data available.")
 
 
-# 📅 Event-Driven Outreach
+#  Event-Driven Outreach
 with tabs[8]:
-    st.subheader("📅 Event-Driven Outreach (Life/Market)")
+    st.subheader(" Event-Driven Outreach (Life/Market)")
     st.caption(
         "Timely, contextual nudge at life/market events | KPIs: Engagement rate, booked meetings"
     )
@@ -2128,11 +2128,11 @@ with tabs[8]:
         # Outreach priority summary
         priority_counts = events_df["PRIORITY"].value_counts()
         col1, col2, col3 = st.columns(3)
-        col1.metric("🔴 High Priority", priority_counts.get("High", 0))
+        col1.metric(" High Priority", priority_counts.get("High", 0))
         col2.metric("🟡 Medium Priority", priority_counts.get("Medium", 0))
         col3.metric("🟢 Low Priority", priority_counts.get("Low", 0))
 
-        st.subheader("📅 Outreach Opportunities")
+        st.subheader(" Outreach Opportunities")
         st.dataframe(events_df, use_container_width=True)
 
         # Outreach type distribution
@@ -2147,9 +2147,9 @@ with tabs[8]:
         st.info("No immediate outreach opportunities identified.")
 
 
-# 💬 Complaint/Sentiment Intelligence
+#  Complaint/Sentiment Intelligence
 with tabs[9]:
-    st.subheader("💬 Complaint/Sentiment Intelligence")
+    st.subheader(" Complaint/Sentiment Intelligence")
     st.caption("Mine notes for issues & intent | KPIs: NPS proxy, time-to-resolution")
 
     sentiment_data = get_sentiment_analysis()
@@ -2157,7 +2157,7 @@ with tabs[9]:
     # Complaints trend
     complaints_df = sentiment_data["complaints_trend"]
     if not complaints_df.empty:
-        st.subheader("📈 Complaints Trend (12 Months)")
+        st.subheader(" Complaints Trend (12 Months)")
         fig = px.line(
             complaints_df,
             x="MONTH",
@@ -2178,7 +2178,7 @@ with tabs[9]:
     # Sentiment analysis
     sentiment_df = sentiment_data["sentiment_analysis"]
     if not sentiment_df.empty:
-        st.subheader("😊 Recent Sentiment Analysis")
+        st.subheader(" Recent Sentiment Analysis")
         sentiment_counts = sentiment_df["SENTIMENT_INDICATOR"].value_counts()
         fig3 = px.pie(
             values=sentiment_counts.values,
@@ -2190,9 +2190,9 @@ with tabs[9]:
         st.dataframe(sentiment_df.head(20), use_container_width=True)
 
 
-# 🤖 Wealth Narrative & Client Briefing (GenAI)
+#  Wealth Narrative & Client Briefing (GenAI)
 with tabs[10]:
-    st.subheader("🤖 Wealth Narrative & Client Briefing (GenAI)")
+    st.subheader(" Wealth Narrative & Client Briefing (GenAI)")
     st.caption(
         "Auto-generate client summaries & talking points | KPIs: Prep time saved, call quality score"
     )
@@ -2216,7 +2216,7 @@ with tabs[10]:
             if not overview_df.empty:
                 client_info = overview_df.iloc[0]
                 st.subheader(
-                    f"👤 Client Profile: {client_info['FIRST_NAME']} {client_info['LAST_NAME']}"
+                    f" Client Profile: {client_info['FIRST_NAME']} {client_info['LAST_NAME']}"
                 )
 
                 col1, col2, col3, col4 = st.columns(4)
@@ -2233,7 +2233,7 @@ with tabs[10]:
                 col4.metric("Advisors", client_info["NUM_ADVISORS"])
 
                 # AI-Generated talking points (simulated)
-                st.subheader("🤖 AI-Generated Talking Points")
+                st.subheader(" AI-Generated Talking Points")
                 talking_points = [
                     f"• Risk profile alignment: Client has {client_info['RISK_TOLERANCE']} risk tolerance with {client_info['NUM_PORTFOLIOS']} portfolio(s)",
                     (
@@ -2253,19 +2253,19 @@ with tabs[10]:
             # Portfolio summary
             portfolios_df = narrative_data["portfolios"]
             if not portfolios_df.empty:
-                st.subheader("💼 Portfolio Summary")
+                st.subheader(" Portfolio Summary")
                 st.dataframe(portfolios_df, use_container_width=True)
 
             # Recent interactions
             interactions_df = narrative_data["interactions"]
             if not interactions_df.empty:
-                st.subheader("📞 Recent Interactions")
+                st.subheader(" Recent Interactions")
                 st.dataframe(interactions_df, use_container_width=True)
 
 
-# 📋 KYB/KYC Ops Copilot (GenAI)
+#  KYB/KYC Ops Copilot (GenAI)
 with tabs[11]:
-    st.subheader("📋 KYB/KYC Ops Copilot (GenAI)")
+    st.subheader(" KYB/KYC Ops Copilot (GenAI)")
     st.caption("Speed up checks & documentation Q&A | KPIs: Cycle time, touchless rate")
 
     kyc_df = get_kyc_insights()
@@ -2276,7 +2276,7 @@ with tabs[11]:
 
         col1, col2 = st.columns(2)
         with col1:
-            st.subheader("📋 KYC Status Distribution")
+            st.subheader(" KYC Status Distribution")
             fig = px.pie(
                 values=kyc_counts.values,
                 names=kyc_counts.index,
@@ -2285,7 +2285,7 @@ with tabs[11]:
             st.plotly_chart(fig, use_container_width=True)
 
         with col2:
-            st.subheader("⚖️ Risk Rating Distribution")
+            st.subheader(" Risk Rating Distribution")
             fig2 = px.pie(
                 values=risk_counts.values,
                 names=risk_counts.index,
@@ -2293,7 +2293,7 @@ with tabs[11]:
             )
             st.plotly_chart(fig2, use_container_width=True)
 
-        st.subheader("📋 KYC Action Items")
+        st.subheader(" KYC Action Items")
         st.dataframe(kyc_df, use_container_width=True)
 
         # Days since verification analysis
@@ -2306,10 +2306,10 @@ with tabs[11]:
         st.plotly_chart(fig3, use_container_width=True)
 
         # AI Copilot simulation
-        st.subheader("🤖 AI-Powered Document Analysis")
+        st.subheader(" AI-Powered Document Analysis")
         st.info(
             """
-        **KYC Copilot Ready** - Upload client documents for instant analysis:
+       **KYC Copilot Ready** - Upload client documents for instant analysis:
         • Document completeness check
         • Risk indicator extraction
         • Compliance gap identification
@@ -2317,18 +2317,18 @@ with tabs[11]:
         """
         )
     else:
-        st.success("✅ All clients are up to date with KYC requirements.")
+        st.success(" All clients are up to date with KYC requirements.")
 
 
-# 🌍 Geospatial Analytics
+#  Geospatial Analytics
 with tabs[12]:
-    st.subheader("🌍 Geospatial Analytics & Climate Risk")
+    st.subheader(" Geospatial Analytics & Climate Risk")
     st.caption(
         "Location-based insights using Snowflake Weather & POI data | KPIs: Geographic AUM distribution, climate risk exposure, market penetration"
     )
 
     # Geographic Distribution Analysis
-    st.subheader("🗺️ Geographic Distribution & Market Concentration")
+    st.subheader(" Geographic Distribution & Market Concentration")
     geo_dist_df = get_client_geographic_distribution()
     if not geo_dist_df.empty:
         # Top states by AUM
@@ -2361,7 +2361,7 @@ with tabs[12]:
             st.plotly_chart(fig_map, use_container_width=True)
 
         # Interactive Mapbox visualization for client locations
-        st.subheader("🗺️ Interactive Client Location Map")
+        st.subheader(" Interactive Client Location Map")
         client_locations_df = get_client_location_details()
 
         # Debug information
@@ -2472,11 +2472,11 @@ with tabs[12]:
             )
             st.plotly_chart(fig_income, use_container_width=True)
 
-        st.subheader("📊 Geographic Distribution Details")
+        st.subheader(" Geographic Distribution Details")
         st.dataframe(geo_dist_df, use_container_width=True)
 
     # Climate & Weather Risk Analysis
-    st.subheader("🌪️ Climate & Weather Risk Exposure")
+    st.subheader(" Climate & Weather Risk Exposure")
     weather_risk_df = get_weather_risk_analysis()
     if not weather_risk_df.empty:
         # Primary climate risks
@@ -2514,7 +2514,7 @@ with tabs[12]:
             fig_sector.update_layout(xaxis_tickangle=45)
             st.plotly_chart(fig_sector, use_container_width=True)
 
-        st.subheader("⚠️ Climate Risk Assessment Details")
+        st.subheader(" Climate Risk Assessment Details")
         st.dataframe(weather_risk_df, use_container_width=True)
 
         # Climate risk insights
@@ -2522,11 +2522,11 @@ with tabs[12]:
         if not high_risk_states.empty:
             total_high_risk_aum = high_risk_states["LOCATION_AUM"].sum()
             st.warning(
-                f"🚨 **High Climate Risk Exposure**: ${total_high_risk_aum:,.2f} AUM in very high-risk locations"
+                f" **High Climate Risk Exposure**: ${total_high_risk_aum:,.2f} AUM in very high-risk locations"
             )
 
         # Interactive climate risk map
-        st.subheader("🌡️ Climate Risk Heat Map")
+        st.subheader(" Climate Risk Heat Map")
         climate_locations_df = get_climate_risk_locations()
         if not climate_locations_df.empty:
             # Color mapping for climate risk levels
@@ -2581,7 +2581,7 @@ with tabs[12]:
             )
 
     # Market Penetration & Opportunity Analysis
-    st.subheader("🎯 Market Penetration & Growth Opportunities")
+    st.subheader(" Market Penetration & Growth Opportunities")
     market_df = get_market_penetration_analysis()
     if not market_df.empty:
         # Opportunity analysis
@@ -2616,11 +2616,11 @@ with tabs[12]:
             )
             st.plotly_chart(fig_opp, use_container_width=True)
 
-        st.subheader("📈 Market Opportunity Details")
+        st.subheader(" Market Opportunity Details")
         st.dataframe(market_df, use_container_width=True)
 
     # Advisor Territory Coverage
-    st.subheader("👥 Advisor Territory Coverage & Efficiency")
+    st.subheader(" Advisor Territory Coverage & Efficiency")
     territory_df = get_advisor_territory_coverage()
     if not territory_df.empty:
         col1, col2 = st.columns(2)
@@ -2650,7 +2650,7 @@ with tabs[12]:
             )
             st.plotly_chart(fig_dist, use_container_width=True)
 
-        st.subheader("🗺️ Territory Coverage Analysis")
+        st.subheader(" Territory Coverage Analysis")
         st.dataframe(territory_df, use_container_width=True)
 
         # Strategy recommendations
@@ -2659,11 +2659,11 @@ with tabs[12]:
         ]
         if not virtual_advisors.empty:
             st.info(
-                f"💡 **Virtual Meeting Optimization**: {len(virtual_advisors)} advisors could benefit from increased virtual client engagement"
+                f" **Virtual Meeting Optimization**: {len(virtual_advisors)} advisors could benefit from increased virtual client engagement"
             )
 
         # Interactive map for advisor coverage
-        st.subheader("🗺️ Advisor Territory Coverage Map")
+        st.subheader(" Advisor Territory Coverage Map")
         advisor_locations_df = get_advisor_location_details()
         if not advisor_locations_df.empty:
             # Color mapping for coverage types
@@ -2737,18 +2737,18 @@ with tabs[12]:
             )
 
             # PyDeck Legend
-            st.subheader("🎨 Map Legend")
+            st.subheader(" Map Legend")
             col1, col2, col3 = st.columns(3)
 
             with col1:
                 st.markdown(
                     """
-                **Client Location Map**
-                - 🔵 Conservative (Steel Blue)
+               **Client Location Map**
+                -  Conservative (Steel Blue)
                 - 🟠 Moderate (Orange)
                 - 🟢 Balanced (Green)
-                - 🔴 Growth (Tomato)
-                - ⚫ Aggressive Growth (Crimson)
+                -  Growth (Tomato)
+                -  Aggressive Growth (Crimson)
                 - *Size = Portfolio Value*
                 """
                 )
@@ -2756,8 +2756,8 @@ with tabs[12]:
             with col2:
                 st.markdown(
                     """
-                **Climate Risk Map**
-                - 🔴 Very High Risk
+               **Climate Risk Map**
+                -  Very High Risk
                 - 🟠 High Risk
                 - 🟡 Medium Risk
                 - 🟢 Low Risk
@@ -2768,26 +2768,26 @@ with tabs[12]:
             with col3:
                 st.markdown(
                     """
-                **Advisor Coverage Map**
-                - 🔴 National Coverage
+               **Advisor Coverage Map**
+                -  National Coverage
                 - 🟠 Regional Coverage
                 - 🟢 State Coverage
-                - 🔵 Local Coverage
+                -  Local Coverage
                 - *Hexagons = AUM Density*
                 """
                 )
 
     # Integration insights
-    st.subheader("🔗 Data Integration Opportunities")
+    st.subheader(" Data Integration Opportunities")
     st.info(
         """
-    **Enhanced with Snowflake Marketplace Data**:
+   **Enhanced with Snowflake Marketplace Data**:
 
-    🌦️ **Weather & Environment Data**: Climate risk analysis, seasonal investment patterns, weather-sensitive sector exposure
+    **Weather & Environment Data**: Climate risk analysis, seasonal investment patterns, weather-sensitive sector exposure
 
-    🏢 **US Addresses & POI Data**: Market density analysis, competitive landscape mapping, demographic targeting
+    **US Addresses & POI Data**: Market density analysis, competitive landscape mapping, demographic targeting
 
-    **Potential Integrations**:
+   **Potential Integrations**:
     • Real-time weather alerts for portfolio adjustments
     • POI-based market sizing and competitive analysis
     • Demographic overlays for targeted marketing campaigns

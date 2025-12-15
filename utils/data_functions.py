@@ -77,7 +77,7 @@ def get_snowflake_session() -> Session:
     try:
         sess = get_active_session()
         if sess is not None:
-            logger.info("✅ Using active Snowflake session from Streamlit in Snowflake")
+            logger.info(" Using active Snowflake session from Streamlit in Snowflake")
             return sess
     except Exception as e:
         logger.info(f"Active session not available, trying credentials: {e}")
@@ -89,7 +89,7 @@ def get_snowflake_session() -> Session:
         missing = [k for k in required if not cfg.get(k)]
         if missing:
             error_msg = (
-                "❌ Snowflake session not available. For Streamlit in Snowflake, no configuration needed. "
+                " Snowflake session not available. For Streamlit in Snowflake, no configuration needed. "
                 "For local development, missing secrets: " + ", ".join(missing)
             )
             logger.error(error_msg)
@@ -97,7 +97,7 @@ def get_snowflake_session() -> Session:
     except Exception as e:
         if "secrets" in str(e).lower():
             error_msg = (
-                "❌ Running outside Streamlit in Snowflake and no secrets configured. "
+                " Running outside Streamlit in Snowflake and no secrets configured. "
                 "Either run in Streamlit in Snowflake (no config needed) or configure local secrets."
             )
             logger.error(error_msg)

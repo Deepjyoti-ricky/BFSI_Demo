@@ -16,13 +16,13 @@ import streamlit as st
 
 from utils.data_functions import get_client_geographic_distribution
 
-st.set_page_config(page_title="Advanced Capabilities", page_icon="🚀", layout="wide")
+st.set_page_config(page_title="Advanced Capabilities", page_icon=None, layout="wide")
 
 # Sidebar - Advanced Analytics Configuration
-st.sidebar.markdown("## 🚀 **Advanced Configuration**")
+st.sidebar.markdown("## **Advanced Configuration**")
 
 # Geospatial Settings
-st.sidebar.markdown("### 🗺️ **Geospatial Settings**")
+st.sidebar.markdown("### **Geospatial Settings**")
 map_style = st.sidebar.selectbox(
     "Default Map Style",
     ["Light", "Dark", "Satellite", "Streets", "Outdoors", "Custom"],
@@ -35,11 +35,11 @@ geospatial_precision = st.sidebar.selectbox(
     index=1,
 )
 
-enable_3d_visualization = st.sidebar.checkbox("🎯 Enable 3D Visualization", value=True)
-enable_clustering = st.sidebar.checkbox("🔍 Enable Data Clustering", value=True)
+enable_3d_visualization = st.sidebar.checkbox(" Enable 3D Visualization", value=True)
+enable_clustering = st.sidebar.checkbox(" Enable Data Clustering", value=True)
 
 # Climate Risk Configuration
-st.sidebar.markdown("### 🌡️ **Climate Risk Settings**")
+st.sidebar.markdown("### **Climate Risk Settings**")
 climate_risk_models = st.sidebar.multiselect(
     "Active Risk Models",
     ["Flood Risk", "Wildfire Risk", "Hurricane Risk", "Drought Risk", "Sea Level Rise"],
@@ -64,13 +64,13 @@ climate_scenario = st.sidebar.selectbox(
 )
 
 # Advanced Analytics Options
-st.sidebar.markdown("### 🔬 **Advanced Analytics**")
-enable_ml_models = st.sidebar.checkbox("🤖 Machine Learning Models", value=True)
-enable_predictive_analytics = st.sidebar.checkbox("🔮 Predictive Analytics", value=True)
-enable_external_data = st.sidebar.checkbox("🌐 External Data Sources", value=True)
+st.sidebar.markdown("### **Advanced Analytics**")
+enable_ml_models = st.sidebar.checkbox(" Machine Learning Models", value=True)
+enable_predictive_analytics = st.sidebar.checkbox(" Predictive Analytics", value=True)
+enable_external_data = st.sidebar.checkbox(" External Data Sources", value=True)
 
 # Data Sources Configuration
-st.sidebar.markdown("### 📊 **Data Sources**")
+st.sidebar.markdown("### **Data Sources**")
 marketplace_data = st.sidebar.multiselect(
     "Snowflake Marketplace Data",
     ["Weather & Environment", "Economic Indicators", "Real Estate", "Demographics"],
@@ -78,7 +78,7 @@ marketplace_data = st.sidebar.multiselect(
 )
 
 # Performance & Optimization
-st.sidebar.markdown("### ⚡ **Performance Settings**")
+st.sidebar.markdown("### **Performance Settings**")
 computation_mode = st.sidebar.selectbox(
     "Computation Mode",
     ["Real-time", "Batch Processing", "Hybrid", "On-Demand"],
@@ -90,7 +90,7 @@ cache_strategy = st.sidebar.selectbox(
 )
 
 # Visualization Controls
-st.sidebar.markdown("### 🎨 **Visualization Controls**")
+st.sidebar.markdown("### **Visualization Controls**")
 color_scheme = st.sidebar.selectbox(
     "Color Scheme",
     ["Default", "High Contrast", "Colorblind Friendly", "Custom"],
@@ -101,23 +101,23 @@ animation_speed = st.sidebar.slider("Animation Speed", 0.1, 3.0, 1.0, 0.1)
 detail_level = st.sidebar.slider("Detail Level", 1, 10, 7, 1)
 
 # Export & Integration
-st.sidebar.markdown("### 📤 **Export & Integration**")
-if st.sidebar.button("🗺️ Export Geospatial Report", use_container_width=True):
+st.sidebar.markdown("### **Export & Integration**")
+if st.sidebar.button(" Export Geospatial Report", use_container_width=True):
     st.sidebar.success("Geospatial report exported!")
 
-if st.sidebar.button("🌡️ Export Climate Analysis", use_container_width=True):
+if st.sidebar.button(" Export Climate Analysis", use_container_width=True):
     st.sidebar.success("Climate analysis exported!")
 
-if st.sidebar.button("🤖 Export ML Insights", use_container_width=True):
+if st.sidebar.button(" Export ML Insights", use_container_width=True):
     st.sidebar.success("ML insights exported!")
 
 # Navigation
-st.sidebar.markdown("### 🧭 **Navigation**")
-if st.sidebar.button("⚡ Real-Time Intelligence ←", use_container_width=True):
-    st.switch_page("pages/04_⚡_Real_Time_Intelligence.py")
+st.sidebar.markdown("### **Navigation**")
+if st.sidebar.button(" Real-Time Intelligence ←", use_container_width=True):
+    st.switch_page("pages/04_Real_Time_Intelligence.py")
 
-if st.sidebar.button("🎯 Back to Overview", use_container_width=True):
-    st.switch_page("pages/01_🎯_Business_Overview.py")
+if st.sidebar.button(" Back to Overview", use_container_width=True):
+    st.switch_page("pages/01_Business_Overview.py")
 
 # Advanced CSS styling
 st.markdown(
@@ -174,7 +174,7 @@ st.markdown(
 st.markdown(
     """
 <div class="hero-section">
-    <h1>🚀 Advanced Capabilities</h1>
+    <h1> Advanced Capabilities</h1>
     <h3>Next-Generation Analytics Platform</h3>
     <p style="font-size: 18px; margin-bottom: 0;">
         Cutting-edge geospatial intelligence, climate risk analysis, and predictive modeling
@@ -186,7 +186,7 @@ st.markdown(
 )
 
 # Platform Capabilities Overview
-st.markdown("### 🎯 **Platform Capabilities Matrix**")
+st.markdown("### **Platform Capabilities Matrix**")
 
 cap_col1, cap_col2, cap_col3, cap_col4 = st.columns(4)
 
@@ -194,7 +194,7 @@ with cap_col1:
     st.markdown(
         """
     <div class="capability-card">
-        <h4>🌍 Geospatial Intelligence</h4>
+        <h4> Geospatial Intelligence</h4>
         <ul style="text-align: left;">
             <li>3D Interactive Maps</li>
             <li>Client Distribution Analysis</li>
@@ -210,7 +210,7 @@ with cap_col2:
     st.markdown(
         """
     <div class="capability-card">
-        <h4>🌡️ Climate Risk Analytics</h4>
+        <h4> Climate Risk Analytics</h4>
         <ul style="text-align: left;">
             <li>Weather Data Integration</li>
             <li>Environmental Risk Scoring</li>
@@ -226,7 +226,7 @@ with cap_col3:
     st.markdown(
         """
     <div class="capability-card">
-        <h4>🔮 Predictive Modeling</h4>
+        <h4> Predictive Modeling</h4>
         <ul style="text-align: left;">
             <li>Market Trend Forecasting</li>
             <li>Client Behavior Prediction</li>
@@ -242,7 +242,7 @@ with cap_col4:
     st.markdown(
         """
     <div class="capability-card">
-        <h4>🎯 Advanced Analytics</h4>
+        <h4> Advanced Analytics</h4>
         <ul style="text-align: left;">
             <li>Real-time Monitoring</li>
             <li>Interactive Dashboards</li>
@@ -259,15 +259,15 @@ st.divider()
 # Advanced Analytics Tabs
 advanced_tabs = st.tabs(
     [
-        "🌍 Geospatial Intelligence",
-        "🌡️ Climate Risk Analysis",
-        "🔮 Predictive Analytics",
+        " Geospatial Intelligence",
+        " Climate Risk Analysis",
+        " Predictive Analytics",
     ]
 )
 
 # Geospatial Intelligence
 with advanced_tabs[0]:
-    st.markdown("### 🌍 **Geospatial Intelligence Platform**")
+    st.markdown("### **Geospatial Intelligence Platform**")
 
     # Geographic metrics
     geo_dist_df = get_client_geographic_distribution()
@@ -286,7 +286,7 @@ with advanced_tabs[0]:
             st.markdown(
                 f"""
             <div class="tech-stack-card">
-                <h4>🗺️ Geographic Coverage</h4>
+                <h4> Geographic Coverage</h4>
                 <h2>{total_states}</h2>
                 <p>States with presence</p>
             </div>
@@ -298,7 +298,7 @@ with advanced_tabs[0]:
             st.markdown(
                 f"""
             <div class="marketplace-card">
-                <h4>💰 Geographic AUM</h4>
+                <h4> Geographic AUM</h4>
                 <h2>${total_aum:,.0f}</h2>
                 <p>Total assets managed</p>
             </div>
@@ -310,7 +310,7 @@ with advanced_tabs[0]:
             st.markdown(
                 f"""
             <div class="prediction-card">
-                <h4>🎯 High Value Markets</h4>
+                <h4> High Value Markets</h4>
                 <h2>{high_value_markets}</h2>
                 <p>Premium market presence</p>
             </div>
@@ -319,15 +319,15 @@ with advanced_tabs[0]:
             )
 
         # Multi-Map Visualization Dashboard
-        st.markdown("**🗺️ Multi-Dimensional Geographic Analytics**")
+        st.markdown("** Multi-Dimensional Geographic Analytics**")
 
         # Create tabbed map interface
         map_tabs = st.tabs(
             [
-                "🏛️ State-Level Analysis",
-                "🏙️ Metropolitan Areas",
-                "🔥 Heat Map Analysis",
-                "📈 Growth Trajectories",
+                " State-Level Analysis",
+                " Metropolitan Areas",
+                " Heat Map Analysis",
+                " Growth Trajectories",
             ]
         )
 
@@ -500,7 +500,7 @@ with advanced_tabs[0]:
                 st.info("No state-level data available to plot")
 
             # State insights
-            st.markdown("**📊 Top Performing States**")
+            st.markdown("** Top Performing States**")
             top_states = geo_dist_df.nlargest(5, "TOTAL_AUM")
             for _, state in top_states.iterrows():
                 st.markdown(
@@ -741,7 +741,7 @@ with advanced_tabs[0]:
             )
 
             st.info(
-                "🔥 **Heat Map Insights**: Hexagonal aggregation shows client density and wealth concentration patterns across major metropolitan areas."
+                " **Heat Map Insights**: Hexagonal aggregation shows client density and wealth concentration patterns across major metropolitan areas."
             )
 
         with map_tabs[3]:
@@ -863,12 +863,12 @@ with advanced_tabs[0]:
             )
 
             st.success(
-                "📈 **Growth Trajectories**: Arc visualization shows wealth migration patterns and emerging market connections across high-growth regions."
+                " **Growth Trajectories**: Arc visualization shows wealth migration patterns and emerging market connections across high-growth regions."
             )
 
 # Climate Risk Analysis
 with advanced_tabs[1]:
-    st.markdown("### 🌡️ **Climate Risk Analysis**")
+    st.markdown("### **Climate Risk Analysis**")
 
     # Climate risk overview
     climate_col1, climate_col2, climate_col3 = st.columns(3)
@@ -877,7 +877,7 @@ with advanced_tabs[1]:
         st.markdown(
             """
         <div class="tech-stack-card">
-            <h4>🌊 High Risk Exposure</h4>
+            <h4> High Risk Exposure</h4>
             <h2>$705M</h2>
             <p>AUM in high-risk areas</p>
         </div>
@@ -889,7 +889,7 @@ with advanced_tabs[1]:
         st.markdown(
             """
         <div class="marketplace-card">
-            <h4>🌡️ Climate Score</h4>
+            <h4> Climate Score</h4>
             <h2>7.3/10</h2>
             <p>Portfolio resilience</p>
         </div>
@@ -901,7 +901,7 @@ with advanced_tabs[1]:
         st.markdown(
             """
         <div class="prediction-card">
-            <h4>🛡️ Risk Mitigation</h4>
+            <h4> Risk Mitigation</h4>
             <h2>92%</h2>
             <p>Coverage rate</p>
         </div>
@@ -910,15 +910,15 @@ with advanced_tabs[1]:
         )
 
     # Advanced Climate Risk Visualization Suite
-    st.markdown("**🌡️ Multi-Layer Climate Risk Analysis**")
+    st.markdown("** Multi-Layer Climate Risk Analysis**")
 
     # Climate risk tabs
     climate_tabs = st.tabs(
         [
-            "🌊 Flood Risk Zones",
-            "🔥 Wildfire Risk",
-            "🌪️ Storm Patterns",
-            "📊 Risk Analytics",
+            " Flood Risk Zones",
+            " Wildfire Risk",
+            " Storm Patterns",
+            " Risk Analytics",
         ]
     )
 
@@ -1032,7 +1032,7 @@ with advanced_tabs[1]:
                     ),
                 ],
                 tooltip={
-                    "html": "<b>🌊 {city}</b><br/>"
+                    "html": "<b> {city}</b><br/>"
                     "Flood Risk: {risk}<br/>"
                     "AUM at Risk: ${aum:,.0f}",
                     "style": {"backgroundColor": "navy", "color": "white"},
@@ -1044,7 +1044,7 @@ with advanced_tabs[1]:
 
         total_flood_risk = flood_df["aum"].sum()
         st.warning(
-            f"🌊 **Flood Risk Exposure**: ${total_flood_risk:,.0f} AUM in flood-prone areas"
+            f" **Flood Risk Exposure**: ${total_flood_risk:,.0f} AUM in flood-prone areas"
         )
 
     with climate_tabs[1]:
@@ -1149,7 +1149,7 @@ with advanced_tabs[1]:
                     )
                 ],
                 tooltip={
-                    "html": "<b>🔥 {city}</b><br/>"
+                    "html": "<b> {city}</b><br/>"
                     "Fire Risk: {risk}<br/>"
                     "AUM at Risk: ${aum:,.0f}",
                     "style": {"backgroundColor": "darkred", "color": "white"},
@@ -1161,7 +1161,7 @@ with advanced_tabs[1]:
 
         total_fire_risk = wildfire_df["aum"].sum()
         st.error(
-            f"🔥 **Wildfire Risk Exposure**: ${total_fire_risk:,.0f} AUM in fire-prone areas"
+            f" **Wildfire Risk Exposure**: ${total_fire_risk:,.0f} AUM in fire-prone areas"
         )
 
     with climate_tabs[2]:
@@ -1281,7 +1281,7 @@ with advanced_tabs[1]:
                     ),
                 ],
                 tooltip={
-                    "html": "<b>🌪️ {city}</b><br/>"
+                    "html": "<b> {city}</b><br/>"
                     "Storm Type: {storm_type}<br/>"
                     "Annual Frequency: {frequency}",
                     "style": {"backgroundColor": "purple", "color": "white"},
@@ -1292,12 +1292,12 @@ with advanced_tabs[1]:
         )
 
         st.info(
-            "🌪️ **Storm Pattern Analysis**: Arc visualization shows seasonal storm corridors and frequency patterns affecting portfolio locations."
+            " **Storm Pattern Analysis**: Arc visualization shows seasonal storm corridors and frequency patterns affecting portfolio locations."
         )
 
     with climate_tabs[3]:
         # Risk analytics dashboard
-        st.markdown("**📊 Comprehensive Risk Analytics**")
+        st.markdown("** Comprehensive Risk Analytics**")
 
         # Create combined risk analysis
         risk_summary = {
@@ -1355,15 +1355,15 @@ with advanced_tabs[1]:
         col1, col2 = st.columns(2)
 
         with col1:
-            st.markdown("**🛡️ Risk Mitigation Strategies**")
+            st.markdown("** Risk Mitigation Strategies**")
             st.markdown(
                 """
-            **Immediate Actions:**
+           **Immediate Actions:**
             • Increase insurance coverage for wildfire zones (72% → 85%)
             • Implement flood-resistant investment strategies
             • Diversify geographic portfolio concentration
 
-            **Medium-term Planning:**
+           **Medium-term Planning:**
             • Climate stress testing for all portfolios
             • ESG integration in investment selection
             • Alternative asset allocation in low-risk regions
@@ -1371,7 +1371,7 @@ with advanced_tabs[1]:
             )
 
         with col2:
-            st.markdown("**📈 Risk-Adjusted Returns**")
+            st.markdown("** Risk-Adjusted Returns**")
             risk_adjusted_data = {
                 "Region": ["Low Risk", "Medium Risk", "High Risk", "Very High Risk"],
                 "Expected Return": [6.2, 7.8, 9.1, 11.3],
@@ -1389,14 +1389,14 @@ with advanced_tabs[1]:
             st.plotly_chart(fig_ra, use_container_width=True)
 
     # Climate adaptation strategies
-    st.markdown("**🛡️ Climate Adaptation Strategies**")
+    st.markdown("** Climate Adaptation Strategies**")
 
     strategy_col1, strategy_col2, strategy_col3 = st.columns(3)
 
     with strategy_col1:
         st.markdown(
             """
-        **🌊 Flood Risk Mitigation**
+       ** Flood Risk Mitigation**
         • Diversify geographic exposure
         • Invest in flood-resistant assets
         • Insurance coverage optimization
@@ -1407,7 +1407,7 @@ with advanced_tabs[1]:
     with strategy_col2:
         st.markdown(
             """
-        **🔥 Wildfire Protection**
+       ** Wildfire Protection**
         • Property insurance review
         • Defensible space requirements
         • Alternative evacuation assets
@@ -1418,7 +1418,7 @@ with advanced_tabs[1]:
     with strategy_col3:
         st.markdown(
             """
-        **🌡️ Temperature Adaptation**
+       ** Temperature Adaptation**
         • Energy-efficient investments
         • HVAC infrastructure upgrades
         • Renewable energy transition
@@ -1428,7 +1428,7 @@ with advanced_tabs[1]:
 
 # Predictive Analytics
 with advanced_tabs[2]:
-    st.markdown("### 🔮 **Predictive Analytics & Forecasting**")
+    st.markdown("### **Predictive Analytics & Forecasting**")
 
     # Prediction metrics
     pred_col1, pred_col2, pred_col3 = st.columns(3)
@@ -1437,7 +1437,7 @@ with advanced_tabs[2]:
         st.markdown(
             """
         <div class="prediction-card">
-            <h4>📈 Forecast Accuracy</h4>
+            <h4> Forecast Accuracy</h4>
             <h2>94.7%</h2>
             <p>Model performance</p>
         </div>
@@ -1449,7 +1449,7 @@ with advanced_tabs[2]:
         st.markdown(
             """
         <div class="tech-stack-card">
-            <h4>🎯 Predictions Generated</h4>
+            <h4> Predictions Generated</h4>
             <h2>1,247</h2>
             <p>This month</p>
         </div>
@@ -1461,7 +1461,7 @@ with advanced_tabs[2]:
         st.markdown(
             """
         <div class="marketplace-card">
-            <h4>💰 Revenue Impact</h4>
+            <h4> Revenue Impact</h4>
             <h2>$3.2M</h2>
             <p>From predictions</p>
         </div>
@@ -1473,7 +1473,7 @@ with advanced_tabs[2]:
     pred_viz_col1, pred_viz_col2 = st.columns(2)
 
     with pred_viz_col1:
-        st.markdown("**📈 AUM Growth Prediction**")
+        st.markdown("** AUM Growth Prediction**")
 
         # Generate prediction data
         import pandas as pd
@@ -1514,7 +1514,7 @@ with advanced_tabs[2]:
         st.plotly_chart(fig, use_container_width=True)
 
     with pred_viz_col2:
-        st.markdown("**🎯 Client Behavior Prediction**")
+        st.markdown("**Client Behavior Prediction**")
 
         # Client behavior prediction matrix
         behavior_data = {
@@ -1540,14 +1540,14 @@ with advanced_tabs[2]:
         st.plotly_chart(fig, use_container_width=True)
 
     # Prediction models overview
-    st.markdown("**🧠 Machine Learning Models**")
+    st.markdown("** Machine Learning Models**")
 
     model_col1, model_col2, model_col3 = st.columns(3)
 
     with model_col1:
         st.markdown(
             """
-        **📊 Time Series Forecasting**
+       ** Time Series Forecasting**
         • ARIMA models for AUM prediction
         • Seasonal decomposition
         • Trend analysis
@@ -1558,7 +1558,7 @@ with advanced_tabs[2]:
     with model_col2:
         st.markdown(
             """
-        **🎯 Classification Models**
+       ** Classification Models**
         • Churn prediction (Random Forest)
         • Risk scoring (XGBoost)
         • Client segmentation (K-means)
@@ -1569,7 +1569,7 @@ with advanced_tabs[2]:
     with model_col3:
         st.markdown(
             """
-        **🔮 Advanced Analytics**
+       ** Advanced Analytics**
         • Reinforcement learning for portfolio optimization
         • NLP for sentiment analysis
         • Computer vision for document processing
@@ -1580,7 +1580,7 @@ with advanced_tabs[2]:
 
 # Platform ROI and Business Value
 st.divider()
-st.markdown("### 💰 **Platform ROI & Business Value**")
+st.markdown("### **Platform ROI & Business Value**")
 
 roi_col1, roi_col2, roi_col3, roi_col4 = st.columns(4)
 
@@ -1588,7 +1588,7 @@ with roi_col1:
     st.markdown(
         """
     <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 5px solid #28a745;">
-        <h4>💰 Revenue Impact</h4>
+        <h4> Revenue Impact</h4>
         <p><strong>$3.2M</strong> Additional revenue</p>
         <p><strong>23%</strong> Growth increase</p>
         <p><strong>$47M</strong> Optimization identified</p>
@@ -1601,7 +1601,7 @@ with roi_col2:
     st.markdown(
         """
     <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 5px solid #007bff;">
-        <h4>⏱️ Efficiency Gains</h4>
+        <h4>⏱ Efficiency Gains</h4>
         <p><strong>80%</strong> Time reduction</p>
         <p><strong>847 hours</strong> Saved monthly</p>
         <p><strong>94.7%</strong> Accuracy improvement</p>
@@ -1614,7 +1614,7 @@ with roi_col3:
     st.markdown(
         """
     <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 5px solid #ffc107;">
-        <h4>🎯 Risk Reduction</h4>
+        <h4> Risk Reduction</h4>
         <p><strong>92%</strong> Risk mitigation</p>
         <p><strong>$8.3M</strong> Losses prevented</p>
         <p><strong>98.3%</strong> Compliance rate</p>
@@ -1627,7 +1627,7 @@ with roi_col4:
     st.markdown(
         """
     <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 5px solid #dc3545;">
-        <h4>🚀 Innovation Metrics</h4>
+        <h4> Innovation Metrics</h4>
         <p><strong>1,247</strong> AI insights</p>
         <p><strong>47</strong> Data products</p>
         <p><strong>100%</strong> Cloud native</p>
@@ -1640,15 +1640,15 @@ with roi_col4:
 st.divider()
 st.markdown(
     """
-### 🎯 **Platform Roadmap**
+### **Platform Roadmap**
 
-**🔮 Future Enhancements**
+** Future Enhancements**
 - Quantum computing integration for portfolio optimization
 - Advanced NLP for document intelligence
 - Blockchain integration for secure transactions
 - IoT data streams for real-time insights
 
-**🤝 Get Started**
+** Get Started**
 Ready to transform your wealth management operations?
 Contact our team to discuss custom implementations and POC opportunities.
 """
@@ -1657,7 +1657,7 @@ Contact our team to discuss custom implementations and POC opportunities.
 # Demo completion message
 st.success(
     """
-🎉 **Demo Complete!** You've explored the full capabilities of the BFSI Wealth 360 Analytics Platform.
+ **Demo Complete!** You've explored the full capabilities of the BFSI Wealth 360 Analytics Platform.
 This cutting-edge solution demonstrates Snowflake's power in delivering enterprise-grade financial analytics.
 """
 )

@@ -15,26 +15,26 @@ import plotly.graph_objects as go
 import pydeck as pdk
 import streamlit as st
 
-st.set_page_config(page_title="Real-Time Intelligence", page_icon="⚡", layout="wide")
+st.set_page_config(page_title="Real-Time Intelligence", page_icon=None, layout="wide")
 
 # Sidebar - Real-Time Configuration & Controls
-st.sidebar.markdown("## ⚡ **Real-Time Controls**")
+st.sidebar.markdown("## **Real-Time Controls**")
 
 # Alert Management
-st.sidebar.markdown("### 🚨 **Alert Management**")
-auto_refresh = st.sidebar.checkbox("🔄 Auto Refresh", value=True)
+st.sidebar.markdown("### **Alert Management**")
+auto_refresh = st.sidebar.checkbox(" Auto Refresh", value=True)
 alert_frequency = st.sidebar.selectbox(
     "Alert Frequency", ["Real-time", "Every 30s", "Every 1min", "Every 5min"], index=0
 )
 
 alert_priority_filter = st.sidebar.multiselect(
     "Alert Priority Filter",
-    ["🔴 Critical", "🟡 High", "🟠 Medium", "🟢 Low", "ℹ️ Info"],
-    default=["🔴 Critical", "🟡 High"],
+    [" Critical", "🟡 High", "🟠 Medium", "🟢 Low", "ℹ Info"],
+    default=[" Critical", "🟡 High"],
 )
 
 # Monitoring Scope
-st.sidebar.markdown("### 🌍 **Monitoring Scope**")
+st.sidebar.markdown("### **Monitoring Scope**")
 monitoring_regions = st.sidebar.multiselect(
     "Geographic Regions",
     ["North America", "Europe", "Asia Pacific", "Latin America", "Global"],
@@ -48,46 +48,46 @@ client_segments = st.sidebar.multiselect(
 )
 
 # Real-Time Thresholds
-st.sidebar.markdown("### ⚖️ **Real-Time Thresholds**")
+st.sidebar.markdown("### **Real-Time Thresholds**")
 risk_alert_threshold = st.sidebar.slider("Risk Alert Level", 0, 100, 75, 5)
 volume_alert_threshold = st.sidebar.slider("Volume Alert (% change)", 0, 500, 150, 25)
 latency_threshold = st.sidebar.slider("Latency Alert (ms)", 100, 5000, 1000, 100)
 
 # System Performance Monitoring
-st.sidebar.markdown("### 📊 **System Performance**")
-system_load = st.sidebar.metric("System Load", "23%", "↘️ -2%")
-active_connections = st.sidebar.metric("Active Connections", "1,247", "↗️ +89")
-data_throughput = st.sidebar.metric("Data Throughput", "12.3 GB/s", "↗️ +1.2")
+st.sidebar.markdown("### **System Performance**")
+system_load = st.sidebar.metric("System Load", "23%", "↘ -2%")
+active_connections = st.sidebar.metric("Active Connections", "1,247", "↗ +89")
+data_throughput = st.sidebar.metric("Data Throughput", "12.3 GB/s", "↗ +1.2")
 
 # Automation Controls
-st.sidebar.markdown("### 🤖 **Automation Controls**")
-enable_auto_response = st.sidebar.checkbox("🤖 Auto Response", value=False)
-enable_smart_routing = st.sidebar.checkbox("🧠 Smart Alert Routing", value=True)
-enable_predictive_alerts = st.sidebar.checkbox("🔮 Predictive Alerts", value=True)
+st.sidebar.markdown("### **Automation Controls**")
+enable_auto_response = st.sidebar.checkbox(" Auto Response", value=False)
+enable_smart_routing = st.sidebar.checkbox(" Smart Alert Routing", value=True)
+enable_predictive_alerts = st.sidebar.checkbox(" Predictive Alerts", value=True)
 
 # Emergency Controls
 st.sidebar.markdown("### 🆘 **Emergency Controls**")
-if st.sidebar.button("🛑 Emergency Stop", use_container_width=True, type="secondary"):
+if st.sidebar.button(" Emergency Stop", use_container_width=True, type="secondary"):
     st.sidebar.warning("Emergency protocols activated!")
 
-if st.sidebar.button("🔄 System Reset", use_container_width=True):
+if st.sidebar.button(" System Reset", use_container_width=True):
     st.sidebar.success("System reset completed!")
 
 # Live Data Export
-st.sidebar.markdown("### 📤 **Live Data Export**")
-if st.sidebar.button("📊 Export Live Dashboard", use_container_width=True):
+st.sidebar.markdown("### **Live Data Export**")
+if st.sidebar.button(" Export Live Dashboard", use_container_width=True):
     st.sidebar.success("Live dashboard exported!")
 
-if st.sidebar.button("🚨 Export Alert Log", use_container_width=True):
+if st.sidebar.button(" Export Alert Log", use_container_width=True):
     st.sidebar.success("Alert log exported!")
 
 # Navigation
-st.sidebar.markdown("### 🧭 **Navigation**")
-if st.sidebar.button("📊 Analytics Deep Dive ←", use_container_width=True):
-    st.switch_page("pages/03_📊_Analytics_Deep_Dive.py")
+st.sidebar.markdown("### **Navigation**")
+if st.sidebar.button(" Analytics Deep Dive ←", use_container_width=True):
+    st.switch_page("pages/03_Analytics_Deep_Dive.py")
 
-if st.sidebar.button("🚀 Advanced Capabilities →", use_container_width=True):
-    st.switch_page("pages/05_🚀_Advanced_Capabilities.py")
+if st.sidebar.button(" Advanced Capabilities →", use_container_width=True):
+    st.switch_page("pages/05_Advanced_Capabilities.py")
 
 # Custom CSS for real-time styling
 st.markdown(
@@ -136,9 +136,9 @@ current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 st.markdown(
     f"""
 <div class="realtime-card">
-    <h1>⚡ Real-Time Intelligence Command Center</h1>
+    <h1> Real-Time Intelligence Command Center</h1>
     <h3>Live monitoring and automated workflows powered by Cortex AI</h3>
-    <p style="font-size: 16px; margin-bottom: 0;">🕐 Last Updated: {current_time} | Status: 🟢 All Systems Operational</p>
+    <p style="font-size: 16px; margin-bottom: 0;"> Last Updated: {current_time} | Status: 🟢 All Systems Operational</p>
 </div>
 """,
     unsafe_allow_html=True,
@@ -147,17 +147,17 @@ st.markdown(
 # Real-time dashboard tabs
 realtime_tabs = st.tabs(
     [
-        "🔴 Live Alerts",
-        "📊 Monitoring Dashboard",
-        "🗺️ Global Intelligence",
-        "🤖 AI Automation",
-        "⚡ Performance Center",
+        " Live Alerts",
+        " Monitoring Dashboard",
+        " Global Intelligence",
+        " AI Automation",
+        " Performance Center",
     ]
 )
 
 # Live Alerts Tab
 with realtime_tabs[0]:
-    st.markdown("### 🔴 **Live Alert Stream**")
+    st.markdown("### **Live Alert Stream**")
 
     # Alert priority filters
     alert_col1, alert_col2, alert_col3 = st.columns([2, 1, 1])
@@ -170,10 +170,10 @@ with realtime_tabs[0]:
         )
 
     with alert_col2:
-        auto_refresh = st.checkbox("🔄 Auto Refresh", value=True)
+        auto_refresh = st.checkbox(" Auto Refresh", value=True)
 
     with alert_col3:
-        if st.button("🔔 Clear All", use_container_width=True):
+        if st.button("Clear All", use_container_width=True):
             st.success("All alerts cleared!")
 
     # Live alerts feed
@@ -185,7 +185,7 @@ with realtime_tabs[0]:
         alert_types = [
             {
                 "type": "Critical",
-                "icon": "🔴",
+                "icon": "",
                 "msg": "Portfolio concentration breach detected",
                 "client": "Sarah Chen",
                 "value": "$12.3M",
@@ -199,7 +199,7 @@ with realtime_tabs[0]:
             },
             {
                 "type": "Critical",
-                "icon": "🔴",
+                "icon": "",
                 "msg": "Suitability drift alert triggered",
                 "client": "Dr. Jennifer Wu",
                 "value": "$15.2M",
@@ -220,7 +220,7 @@ with realtime_tabs[0]:
             },
             {
                 "type": "Info",
-                "icon": "🔵",
+                "icon": "",
                 "msg": "Rebalancing opportunity identified",
                 "client": "David Chen",
                 "value": "$4.2M",
@@ -243,7 +243,7 @@ with realtime_tabs[0]:
     live_alerts = get_live_alerts()
 
     # Display alerts
-    st.markdown("**🚨 Active Alerts (Real-time Feed):**")
+    st.markdown("** Active Alerts (Real-time Feed):**")
 
     for alert in live_alerts[:10]:  # Show top 10 alerts
         if alert["type"] in alert_filter:
@@ -280,7 +280,7 @@ with realtime_tabs[0]:
 
 # Monitoring Dashboard Tab
 with realtime_tabs[1]:
-    st.markdown("### 📊 **Real-Time Monitoring Dashboard**")
+    st.markdown("### **Real-Time Monitoring Dashboard**")
 
     # Key metrics row
     metrics_col1, metrics_col2, metrics_col3, metrics_col4, metrics_col5 = st.columns(5)
@@ -289,7 +289,7 @@ with realtime_tabs[1]:
         st.markdown(
             """
         <div class="monitor-card">
-            <h4>🔴 Critical Alerts</h4>
+            <h4> Critical Alerts</h4>
             <h2>7</h2>
             <p>Last 24h: +3</p>
         </div>
@@ -301,7 +301,7 @@ with realtime_tabs[1]:
         st.markdown(
             """
         <div class="monitor-card">
-            <h4>💰 AUM at Risk</h4>
+            <h4> AUM at Risk</h4>
             <h2>$47M</h2>
             <p>Requires attention</p>
         </div>
@@ -313,7 +313,7 @@ with realtime_tabs[1]:
         st.markdown(
             """
         <div class="monitor-card">
-            <h4>⚡ Response Time</h4>
+            <h4> Response Time</h4>
             <h2>1.2s</h2>
             <p>Avg system response</p>
         </div>
@@ -325,7 +325,7 @@ with realtime_tabs[1]:
         st.markdown(
             """
         <div class="monitor-card">
-            <h4>🎯 Accuracy</h4>
+            <h4> Accuracy</h4>
             <h2>94.7%</h2>
             <p>AI prediction rate</p>
         </div>
@@ -337,7 +337,7 @@ with realtime_tabs[1]:
         st.markdown(
             """
         <div class="monitor-card">
-            <h4>🚀 Automated</h4>
+            <h4> Automated</h4>
             <h2>89%</h2>
             <p>Process automation</p>
         </div>
@@ -419,7 +419,7 @@ with realtime_tabs[1]:
         st.plotly_chart(fig_health, use_container_width=True)
 
     # Live transaction monitoring
-    st.markdown("**💳 Live Transaction Monitoring**")
+    st.markdown("** Live Transaction Monitoring**")
 
     @st.cache_data(ttl=5)
     def get_transaction_stream():
@@ -460,20 +460,20 @@ with realtime_tabs[1]:
 
 # Global Intelligence Map Tab
 with realtime_tabs[2]:
-    st.markdown("### 🗺️ **Global Intelligence Map**")
+    st.markdown("### **Global Intelligence Map**")
 
     # Map type selector
     map_type = st.selectbox(
         "Select Intelligence View:",
         [
-            "🌍 Global Activity",
-            "💰 Transaction Flow",
-            "🚨 Risk Hotspots",
-            "📈 Market Sentiment",
+            " Global Activity",
+            " Transaction Flow",
+            " Risk Hotspots",
+            " Market Sentiment",
         ],
     )
 
-    if map_type == "🌍 Global Activity":
+    if map_type == " Global Activity":
         # Global activity map
         @st.cache_data
         def get_global_activity():
@@ -574,7 +574,7 @@ with realtime_tabs[2]:
                     ),
                 ],
                 tooltip={
-                    "html": "<b>🌍 {city}</b><br/>Activity Level: {activity}",
+                    "html": "<b> {city}</b><br/>Activity Level: {activity}",
                     "style": {"backgroundColor": "darkblue", "color": "white"},
                 },
             ),
@@ -583,10 +583,10 @@ with realtime_tabs[2]:
         )
 
         st.info(
-            "🌍 **Global Activity**: Real-time client activity and system usage across major financial centers."
+            " **Global Activity**: Real-time client activity and system usage across major financial centers."
         )
 
-    elif map_type == "💰 Transaction Flow":
+    elif map_type == " Transaction Flow":
         # Transaction flow visualization
         @st.cache_data
         def get_transaction_flows():
@@ -673,7 +673,7 @@ with realtime_tabs[2]:
                     ),
                 ],
                 tooltip={
-                    "html": "<b>💰 Transaction Flow</b><br/>Amount: ${amount:,.0f}",
+                    "html": "<b> Transaction Flow</b><br/>Amount: ${amount:,.0f}",
                     "style": {"backgroundColor": "green", "color": "white"},
                 },
             ),
@@ -682,45 +682,45 @@ with realtime_tabs[2]:
         )
 
         st.success(
-            "💰 **Transaction Flow**: Live capital movement and cross-border transaction patterns."
+            " **Transaction Flow**: Live capital movement and cross-border transaction patterns."
         )
 
 # AI Automation Tab
 with realtime_tabs[3]:
-    st.markdown("### 🤖 **AI Automation Control Center**")
+    st.markdown("### **AI Automation Control Center**")
 
     # Automation status
     automation_col1, automation_col2, automation_col3 = st.columns(3)
 
     with automation_col1:
-        st.markdown("**🔄 Active Automations**")
+        st.markdown("** Active Automations**")
         automations = [
-            "✅ Portfolio Rebalancing",
-            "✅ Risk Monitoring",
-            "✅ Client Alerts",
-            "✅ Compliance Checks",
-            "⏸️ Report Generation",
+            " Portfolio Rebalancing",
+            " Risk Monitoring",
+            " Client Alerts",
+            " Compliance Checks",
+            "⏸ Report Generation",
         ]
         for automation in automations:
             st.markdown(automation)
 
     with automation_col2:
-        st.markdown("**📊 Automation Performance**")
-        st.metric("🎯 Success Rate", "97.3%", delta="+1.2%")
-        st.metric("⚡ Avg Processing", "2.4s", delta="-0.5s")
-        st.metric("💰 Cost Savings", "$45K", delta="+$8K")
+        st.markdown("** Automation Performance**")
+        st.metric("Success Rate", "97.3%", delta="+1.2%")
+        st.metric("Avg Processing", "2.4s", delta="-0.5s")
+        st.metric("Cost Savings", "$45K", delta="+$8K")
 
     with automation_col3:
-        st.markdown("**🚀 Quick Actions**")
-        if st.button("🔄 Trigger Rebalancing", use_container_width=True):
-            st.success("✅ Rebalancing automation triggered!")
-        if st.button("📊 Generate Reports", use_container_width=True):
-            st.info("📋 Report generation started...")
-        if st.button("🚨 Run Risk Scan", use_container_width=True):
-            st.warning("🔍 Risk scan initiated...")
+        st.markdown("** Quick Actions**")
+        if st.button("Trigger Rebalancing", use_container_width=True):
+            st.success(" Rebalancing automation triggered!")
+        if st.button("Generate Reports", use_container_width=True):
+            st.info(" Report generation started...")
+        if st.button("Run Risk Scan", use_container_width=True):
+            st.warning(" Risk scan initiated...")
 
     # Automation workflow visualization
-    st.markdown("**🔄 Live Automation Workflows**")
+    st.markdown("** Live Automation Workflows**")
 
     workflow_data = {
         "Stage": [
@@ -730,7 +730,7 @@ with realtime_tabs[3]:
             "Action Execution",
             "Verification",
         ],
-        "Status": ["✅ Complete", "⚡ Processing", "⏳ Queue", "⏸️ Pending", "📋 Ready"],
+        "Status": [" Complete", " Processing", "⏳ Queue", "⏸ Pending", " Ready"],
         "Processing_Time": [0.3, 1.8, 0.6, 2.1, 0.4],
         "Success_Rate": [99.9, 97.3, 98.7, 96.2, 99.1],
     }
@@ -773,13 +773,13 @@ with realtime_tabs[3]:
 
 # Performance Center Tab
 with realtime_tabs[4]:
-    st.markdown("### ⚡ **Performance Center**")
+    st.markdown("### **Performance Center**")
 
     # Performance metrics grid
     perf_col1, perf_col2 = st.columns(2)
 
     with perf_col1:
-        st.markdown("**🚀 System Performance**")
+        st.markdown("** System Performance**")
 
         # CPU and Memory usage
         cpu_usage = np.random.uniform(60, 85)
@@ -839,7 +839,7 @@ with realtime_tabs[4]:
         st.plotly_chart(fig_resources, use_container_width=True)
 
     with perf_col2:
-        st.markdown("**📊 Performance Trends**")
+        st.markdown("** Performance Trends**")
 
         # Performance trend over time
         hours = list(range(24))
@@ -881,7 +881,7 @@ with realtime_tabs[4]:
         st.plotly_chart(fig_trends, use_container_width=True)
 
     # Live performance table
-    st.markdown("**📈 Live Performance Metrics**")
+    st.markdown("** Live Performance Metrics**")
 
     perf_metrics = pd.DataFrame(
         {
@@ -895,7 +895,7 @@ with realtime_tabs[4]:
             "Current": ["1.2s", "0.3s", "2.1s", "94.7%", "0.02%"],
             "Target": ["<2.0s", "<0.5s", "<3.0s", ">90%", "<0.1%"],
             "Status": ["🟢 Good", "🟢 Good", "🟢 Good", "🟢 Good", "🟢 Good"],
-            "Trend": ["↗️ +5%", "↘️ -2%", "↗️ +8%", "↗️ +1%", "↘️ -15%"],
+            "Trend": ["↗ +5%", "↘ -2%", "↗ +8%", "↗ +1%", "↘ -15%"],
         }
     )
 
@@ -905,13 +905,13 @@ with realtime_tabs[4]:
 st.divider()
 st.markdown(
     """
-### 🔄 **System Status Summary**
+### **System Status Summary**
 - **🟢 All Systems Operational** | Last Incident: None in 47 days
-- **⚡ Real-time Processing**: 1,247 events/minute | **🎯 AI Accuracy**: 94.7%
-- **🚀 Automation Level**: 89% automated workflows | **💰 Cost Optimization**: $45K/month saved
+- ** Real-time Processing**: 1,247 events/minute | **AI Accuracy**: 94.7%
+- ** Automation Level**: 89% automated workflows | ** Cost Optimization**: $45K/month saved
 """
 )
 
 # Auto-refresh indicator
-if st.button("🔄 Force Refresh Dashboard"):
+if st.button("Force Refresh Dashboard"):
     st.rerun()

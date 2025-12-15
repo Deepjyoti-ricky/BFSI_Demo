@@ -19,13 +19,13 @@ from utils.data_functions import (
     get_trade_fee_anomalies,
 )
 
-st.set_page_config(page_title="Analytics Deep Dive", page_icon="📊", layout="wide")
+st.set_page_config(page_title="Analytics Deep Dive", page_icon=None, layout="wide")
 
 # Sidebar - Analytics Configuration & Filters
-st.sidebar.markdown("## 📊 **Analytics Configuration**")
+st.sidebar.markdown("## **Analytics Configuration**")
 
 # Portfolio Filters
-st.sidebar.markdown("### 🎯 **Portfolio Filters**")
+st.sidebar.markdown("### **Portfolio Filters**")
 selected_portfolios = st.sidebar.multiselect(
     "Select Portfolios",
     ["All Portfolios", "Growth", "Conservative", "Balanced", "Aggressive", "Income"],
@@ -39,7 +39,7 @@ advisor_filter = st.sidebar.selectbox(
 )
 
 # Risk Analysis Settings
-st.sidebar.markdown("### ⚠️ **Risk Analysis Settings**")
+st.sidebar.markdown("### **Risk Analysis Settings**")
 risk_tolerance = st.sidebar.slider("Risk Tolerance Threshold", 0.0, 10.0, 7.5, 0.5)
 drift_threshold = st.sidebar.slider("Portfolio Drift Alert (%)", 1.0, 20.0, 5.0, 1.0)
 volatility_window = st.sidebar.selectbox(
@@ -47,7 +47,7 @@ volatility_window = st.sidebar.selectbox(
 )
 
 # Performance Benchmarks
-st.sidebar.markdown("### 📈 **Performance Benchmarks**")
+st.sidebar.markdown("### **Performance Benchmarks**")
 primary_benchmark = st.sidebar.selectbox(
     "Primary Benchmark",
     ["S&P 500", "NASDAQ", "Russell 2000", "MSCI World", "Custom Blend"],
@@ -61,42 +61,42 @@ comparison_period = st.sidebar.selectbox(
 )
 
 # Alert Configuration
-st.sidebar.markdown("### 🚨 **Alert Configuration**")
-enable_drift_alerts = st.sidebar.checkbox("🎯 Portfolio Drift Alerts", value=True)
-enable_performance_alerts = st.sidebar.checkbox("📈 Performance Alerts", value=True)
-enable_risk_alerts = st.sidebar.checkbox("⚠️ Risk Level Alerts", value=True)
-enable_compliance_alerts = st.sidebar.checkbox("📋 Compliance Alerts", value=True)
+st.sidebar.markdown("### **Alert Configuration**")
+enable_drift_alerts = st.sidebar.checkbox(" Portfolio Drift Alerts", value=True)
+enable_performance_alerts = st.sidebar.checkbox(" Performance Alerts", value=True)
+enable_risk_alerts = st.sidebar.checkbox(" Risk Level Alerts", value=True)
+enable_compliance_alerts = st.sidebar.checkbox(" Compliance Alerts", value=True)
 
 # Real-time Analytics Monitoring
-st.sidebar.markdown("### 📊 **Analytics Monitoring**")
-portfolios_analyzed = st.sidebar.metric("Portfolios Analyzed", "892", "↗️ +47")
-avg_analysis_time = st.sidebar.metric("Avg Analysis Time", "0.8s", "↘️ -0.1s")
-active_alerts = st.sidebar.metric("Active Alerts", "23", "↗️ +5")
+st.sidebar.markdown("### **Analytics Monitoring**")
+portfolios_analyzed = st.sidebar.metric("Portfolios Analyzed", "892", "↗ +47")
+avg_analysis_time = st.sidebar.metric("Avg Analysis Time", "0.8s", "↘ -0.1s")
+active_alerts = st.sidebar.metric("Active Alerts", "23", "↗ +5")
 
 # Advanced Analytics Options
-st.sidebar.markdown("### 🔬 **Advanced Analytics**")
-enable_ml_predictions = st.sidebar.checkbox("🤖 ML Predictions", value=True)
-enable_stress_testing = st.sidebar.checkbox("⚡ Stress Testing", value=False)
-enable_scenario_analysis = st.sidebar.checkbox("🎭 Scenario Analysis", value=False)
+st.sidebar.markdown("### **Advanced Analytics**")
+enable_ml_predictions = st.sidebar.checkbox(" ML Predictions", value=True)
+enable_stress_testing = st.sidebar.checkbox(" Stress Testing", value=False)
+enable_scenario_analysis = st.sidebar.checkbox(" Scenario Analysis", value=False)
 
 # Export & Reporting
-st.sidebar.markdown("### 📤 **Export & Reporting**")
-if st.sidebar.button("📊 Export Analytics Report", use_container_width=True):
+st.sidebar.markdown("### **Export & Reporting**")
+if st.sidebar.button(" Export Analytics Report", use_container_width=True):
     st.sidebar.success("Analytics report exported!")
 
-if st.sidebar.button("📈 Export Performance Data", use_container_width=True):
+if st.sidebar.button(" Export Performance Data", use_container_width=True):
     st.sidebar.success("Performance data exported!")
 
-if st.sidebar.button("🚨 Export Alert Summary", use_container_width=True):
+if st.sidebar.button(" Export Alert Summary", use_container_width=True):
     st.sidebar.success("Alert summary exported!")
 
 # Navigation
-st.sidebar.markdown("### 🧭 **Navigation**")
-if st.sidebar.button("🧠 AI-Powered Insights ←", use_container_width=True):
-    st.switch_page("pages/02_🧠_AI_Powered_Insights.py")
+st.sidebar.markdown("### **Navigation**")
+if st.sidebar.button(" AI-Powered Insights ←", use_container_width=True):
+    st.switch_page("pages/02_AI_Powered_Insights.py")
 
-if st.sidebar.button("⚡ Real-Time Intelligence →", use_container_width=True):
-    st.switch_page("pages/04_⚡_Real_Time_Intelligence.py")
+if st.sidebar.button(" Real-Time Intelligence →", use_container_width=True):
+    st.switch_page("pages/04_Real_Time_Intelligence.py")
 
 # Custom CSS for professional styling
 st.markdown(
@@ -141,7 +141,7 @@ st.markdown(
 st.markdown(
     """
 <div style="background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%); padding: 30px; border-radius: 15px; color: white; text-align: center; margin-bottom: 30px;">
-    <h1>📊 Analytics Deep Dive</h1>
+    <h1> Analytics Deep Dive</h1>
     <p style="font-size: 18px; margin-bottom: 0;">Advanced portfolio analytics enhanced by Cortex AI intelligence</p>
 </div>
 """,
@@ -149,7 +149,7 @@ st.markdown(
 )
 
 # Analytics Overview Dashboard
-st.markdown("### 🎯 **Portfolio Analytics Overview**")
+st.markdown("### **Portfolio Analytics Overview**")
 
 # Key metrics in cards
 metrics_col1, metrics_col2, metrics_col3, metrics_col4 = st.columns(4)
@@ -158,7 +158,7 @@ with metrics_col1:
     st.markdown(
         """
     <div class="metric-card">
-        <h3>💰 Total AUM</h3>
+        <h3> Total AUM</h3>
         <h2>$895M</h2>
         <p>+5.7% YTD</p>
     </div>
@@ -170,7 +170,7 @@ with metrics_col2:
     st.markdown(
         """
     <div class="metric-card">
-        <h3>📊 Portfolios</h3>
+        <h3> Portfolios</h3>
         <h2>1,247</h2>
         <p>Active management</p>
     </div>
@@ -182,7 +182,7 @@ with metrics_col3:
     st.markdown(
         """
     <div class="metric-card">
-        <h3>⚖️ Risk Score</h3>
+        <h3> Risk Score</h3>
         <h2>7.2/10</h2>
         <p>Moderate risk</p>
     </div>
@@ -194,7 +194,7 @@ with metrics_col4:
     st.markdown(
         """
     <div class="metric-card">
-        <h3>🎯 Compliance</h3>
+        <h3> Compliance</h3>
         <h2>98.3%</h2>
         <p>Above benchmark</p>
     </div>
@@ -207,17 +207,17 @@ st.divider()
 # Professional Analytics Sections
 analytics_tabs = st.tabs(
     [
-        "⚖️ Risk & Suitability",
-        "📈 Portfolio Drift",
-        "💰 Cash Management",
-        "🔍 Anomaly Detection",
-        "👥 Advisor Analytics",
+        " Risk & Suitability",
+        " Portfolio Drift",
+        " Cash Management",
+        " Anomaly Detection",
+        " Advisor Analytics",
     ]
 )
 
 # Risk & Suitability Analysis
 with analytics_tabs[0]:
-    st.markdown("### ⚖️ **Risk & Suitability Analysis**")
+    st.markdown("### **Risk & Suitability Analysis**")
 
     suitability_alerts = get_suitability_risk_alerts()
 
@@ -228,7 +228,7 @@ with analytics_tabs[0]:
         st.markdown(
             """
         <div class="risk-card">
-            <h4>🔴 High Risk Items</h4>
+            <h4> High Risk Items</h4>
             <h2>7</h2>
             <p>Immediate attention required</p>
         </div>
@@ -287,20 +287,20 @@ with analytics_tabs[0]:
             st.plotly_chart(fig, use_container_width=True)
 
         with col2:
-            st.markdown("**🎯 Risk Mitigation Actions**")
+            st.markdown("** Risk Mitigation Actions**")
             st.markdown(
                 """
-            **High Priority (Immediate):**
+           **High Priority (Immediate):**
             • Portfolio concentration review
             • Suitability realignment
             • Client communication
 
-            **Medium Priority (30 days):**
+           **Medium Priority (30 days):**
             • Quarterly risk assessment
             • Strategy optimization
             • Performance review
 
-            **Monitoring:**
+           **Monitoring:**
             • Automated alerts
             • Compliance tracking
             • Regular reporting
@@ -308,7 +308,7 @@ with analytics_tabs[0]:
             )
 
         # Detailed Risk Table
-        st.markdown("**📋 Detailed Risk Analysis**")
+        st.markdown("** Detailed Risk Analysis**")
         st.dataframe(
             suitability_alerts.style.format({"TOTAL_PORTFOLIO_VALUE": "${:,.0f}"}),
             use_container_width=True,
@@ -316,7 +316,7 @@ with analytics_tabs[0]:
 
 # Portfolio Drift Analysis
 with analytics_tabs[1]:
-    st.markdown("### 📈 **Portfolio Drift & Rebalancing**")
+    st.markdown("### **Portfolio Drift & Rebalancing**")
 
     drift_analysis = get_portfolio_drift_analysis()
 
@@ -332,7 +332,7 @@ with analytics_tabs[1]:
             st.markdown(
                 f"""
             <div class="risk-card">
-                <h4>⚠️ High Drift</h4>
+                <h4> High Drift</h4>
                 <h2>{high_drift}</h2>
                 <p>Rebalancing required</p>
             </div>
@@ -344,7 +344,7 @@ with analytics_tabs[1]:
             st.markdown(
                 f"""
             <div class="opportunity-card">
-                <h4>📊 Medium Drift</h4>
+                <h4> Medium Drift</h4>
                 <h2>{medium_drift}</h2>
                 <p>Monitor closely</p>
             </div>
@@ -356,7 +356,7 @@ with analytics_tabs[1]:
             st.markdown(
                 f"""
             <div class="success-card">
-                <h4>✅ Low Drift</h4>
+                <h4> Low Drift</h4>
                 <h2>{low_drift}</h2>
                 <p>Within target range</p>
             </div>
@@ -397,7 +397,7 @@ with analytics_tabs[1]:
 
             asset_drift.columns = ["Avg Drift %", "Max Drift %", "Count", "Total Value"]
 
-            st.markdown("**📊 Asset Class Analysis**")
+            st.markdown("** Asset Class Analysis**")
             st.dataframe(
                 asset_drift.style.format(
                     {
@@ -411,7 +411,7 @@ with analytics_tabs[1]:
 
 # Cash Management
 with analytics_tabs[2]:
-    st.markdown("### 💰 **Cash Management & Optimization**")
+    st.markdown("### **Cash Management & Optimization**")
 
     idle_cash = get_idle_cash_analysis()
 
@@ -429,7 +429,7 @@ with analytics_tabs[2]:
             st.markdown(
                 f"""
             <div class="opportunity-card">
-                <h4>💰 Total Idle Cash</h4>
+                <h4> Total Idle Cash</h4>
                 <h2>${total_idle_cash:,.0f}</h2>
                 <p>Optimization opportunity</p>
             </div>
@@ -441,7 +441,7 @@ with analytics_tabs[2]:
             st.markdown(
                 f"""
             <div class="success-card">
-                <h4>📈 Revenue Potential</h4>
+                <h4> Revenue Potential</h4>
                 <h2>${potential_income:,.0f}</h2>
                 <p>Annual income opportunity</p>
             </div>
@@ -453,7 +453,7 @@ with analytics_tabs[2]:
             st.markdown(
                 f"""
             <div class="risk-card">
-                <h4>🚨 High Priority</h4>
+                <h4> High Priority</h4>
                 <h2>{high_priority_count}</h2>
                 <p>Immediate action items</p>
             </div>
@@ -499,7 +499,7 @@ with analytics_tabs[2]:
 
 # Anomaly Detection
 with analytics_tabs[3]:
-    st.markdown("### 🔍 **Transaction Anomaly Detection**")
+    st.markdown("### **Transaction Anomaly Detection**")
 
     anomalies_df = get_trade_fee_anomalies()
 
@@ -520,7 +520,7 @@ with analytics_tabs[3]:
             st.markdown(
                 f"""
             <div class="risk-card">
-                <h4>🔍 Total Anomalies</h4>
+                <h4> Total Anomalies</h4>
                 <h2>{total_anomalies}</h2>
                 <p>Last 90 days</p>
             </div>
@@ -532,7 +532,7 @@ with analytics_tabs[3]:
             st.markdown(
                 f"""
             <div class="opportunity-card">
-                <h4>🚨 Critical Anomalies</h4>
+                <h4> Critical Anomalies</h4>
                 <h2>{critical_count}</h2>
                 <p>Require investigation</p>
             </div>
@@ -570,7 +570,7 @@ with analytics_tabs[3]:
 
 # Advisor Analytics
 with analytics_tabs[4]:
-    st.markdown("### 👥 **Advisor Performance Analytics**")
+    st.markdown("### **Advisor Performance Analytics**")
 
     advisor_data = get_advisor_productivity()
 
@@ -586,7 +586,7 @@ with analytics_tabs[4]:
             st.markdown(
                 f"""
             <div class="metric-card">
-                <h4>👥 Total Advisors</h4>
+                <h4> Total Advisors</h4>
                 <h2>{total_advisors}</h2>
                 <p>Active advisors</p>
             </div>
@@ -598,7 +598,7 @@ with analytics_tabs[4]:
             st.markdown(
                 f"""
             <div class="success-card">
-                <h4>💰 Avg AUM</h4>
+                <h4> Avg AUM</h4>
                 <h2>${avg_aum:,.0f}</h2>
                 <p>Per advisor</p>
             </div>
@@ -610,7 +610,7 @@ with analytics_tabs[4]:
             st.markdown(
                 f"""
             <div class="opportunity-card">
-                <h4>👤 Avg Clients</h4>
+                <h4> Avg Clients</h4>
                 <h2>{avg_clients:.0f}</h2>
                 <p>Per advisor</p>
             </div>
@@ -653,7 +653,7 @@ with analytics_tabs[4]:
 
 # Analytics Summary Dashboard
 st.divider()
-st.markdown("### 📋 **Analytics Summary Dashboard**")
+st.markdown("### **Analytics Summary Dashboard**")
 
 summary_col1, summary_col2, summary_col3, summary_col4 = st.columns(4)
 
@@ -661,7 +661,7 @@ with summary_col1:
     st.markdown(
         """
     <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 5px solid #ff4444;">
-        <h4>⚖️ Risk Alerts</h4>
+        <h4> Risk Alerts</h4>
         <p><strong>7</strong> High Priority</p>
         <p><strong>16</strong> Medium Priority</p>
         <p><strong>342</strong> Low Risk</p>
@@ -674,7 +674,7 @@ with summary_col2:
     st.markdown(
         """
     <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 5px solid #ffa500;">
-        <h4>📊 Portfolio Drift</h4>
+        <h4> Portfolio Drift</h4>
         <p><strong>23</strong> Portfolios with drift</p>
         <p><strong>7</strong> High drift</p>
         <p><strong>16</strong> Medium drift</p>
@@ -687,7 +687,7 @@ with summary_col3:
     st.markdown(
         """
     <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 5px solid #90ee90;">
-        <h4>💰 Cash Optimization</h4>
+        <h4> Cash Optimization</h4>
         <p><strong>$47M</strong> Idle cash</p>
         <p><strong>$1.8M</strong> Potential income</p>
         <p><strong>12</strong> High priority</p>
@@ -700,7 +700,7 @@ with summary_col4:
     st.markdown(
         """
     <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 5px solid #4fc3f7;">
-        <h4>🔍 Anomalies</h4>
+        <h4> Anomalies</h4>
         <p><strong>89</strong> Total anomalies</p>
         <p><strong>12</strong> Critical</p>
         <p><strong>77</strong> Minor</p>
@@ -713,9 +713,9 @@ with summary_col4:
 st.divider()
 st.markdown(
     """
-### 🚀 **Next Steps**
-- **⚡ Real-Time Intelligence**: Live monitoring and automated workflows
-- **🚀 Advanced Capabilities**: Geospatial analytics and predictive modeling
-- **🧠 AI-Powered Insights**: Return to Cortex AI demonstrations
+### **Next Steps**
+- ** Real-Time Intelligence**: Live monitoring and automated workflows
+- ** Advanced Capabilities**: Geospatial analytics and predictive modeling
+- **AI-Powered Insights**: Return to Cortex AI demonstrations
 """
 )

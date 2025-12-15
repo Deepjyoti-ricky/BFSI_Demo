@@ -18,28 +18,28 @@ from utils.data_functions import (
     get_trade_fee_anomalies,
 )
 
-st.set_page_config(page_title="Portfolio Management", page_icon="🎯", layout="wide")
+st.set_page_config(page_title="Portfolio Management", page_icon=None, layout="wide")
 
 # Page header
-st.markdown("# 📊 Analytics Deep Dive")
+st.markdown("# Analytics Deep Dive")
 st.caption(
-    "📊 **Advanced portfolio analytics enhanced by Cortex AI: risk monitoring, drift analysis, and performance optimization**"
+    " **Advanced portfolio analytics enhanced by Cortex AI: risk monitoring, drift analysis, and performance optimization**"
 )
 
 # Sub-navigation within Portfolio Management
 portfolio_subtabs = st.tabs(
     [
-        "⚖️ Suitability & Risk",
-        "📊 Portfolio Drift",
-        "💰 Idle Cash Management",
-        "🔍 Transaction Anomalies",
-        "👥 Advisor Performance",
+        " Suitability & Risk",
+        " Portfolio Drift",
+        " Idle Cash Management",
+        " Transaction Anomalies",
+        " Advisor Performance",
     ]
 )
 
 # Suitability & Risk Alerts
 with portfolio_subtabs[0]:
-    st.markdown("### ⚖️ Suitability & Risk Drift Alerts")
+    st.markdown("### Suitability & Risk Drift Alerts")
     st.caption(
         "Ensure portfolio aligns to client risk tolerance | KPIs: Suitability breaches, time-to-remediate"
     )
@@ -49,7 +49,7 @@ with portfolio_subtabs[0]:
         col1, col2 = st.columns([2, 1])
 
         with col1:
-            st.markdown("**⚠️ Risk Misalignment Alerts**")
+            st.markdown("** Risk Misalignment Alerts**")
             st.dataframe(suitability_alerts, use_container_width=True)
 
         with col2:
@@ -68,18 +68,18 @@ with portfolio_subtabs[0]:
             st.plotly_chart(fig, use_container_width=True)
 
             # Summary metrics
-            st.markdown("**📊 Risk Summary**")
+            st.markdown("** Risk Summary**")
             high_alerts = len(
                 suitability_alerts[suitability_alerts["ALERT_LEVEL"] == "High"]
             )
             medium_alerts = len(
                 suitability_alerts[suitability_alerts["ALERT_LEVEL"] == "Medium"]
             )
-            st.metric("🔴 High Priority", high_alerts, delta="Immediate action")
+            st.metric("High Priority", high_alerts, delta="Immediate action")
             st.metric("🟡 Medium Priority", medium_alerts, delta="Review required")
 
         # Alignment Analysis
-        st.markdown("**📊 Risk Alignment Analysis**")
+        st.markdown("** Risk Alignment Analysis**")
         alignment_analysis = (
             suitability_alerts.groupby(["ALIGNMENT_STATUS", "ALERT_LEVEL"])
             .agg({"TOTAL_PORTFOLIO_VALUE": ["count", "sum", "mean"]})
@@ -89,7 +89,7 @@ with portfolio_subtabs[0]:
         st.dataframe(alignment_analysis, use_container_width=True)
 
         # Top Misaligned Portfolios
-        st.markdown("**🎯 Top Priority Portfolios for Review**")
+        st.markdown("** Top Priority Portfolios for Review**")
         top_misaligned = suitability_alerts.nlargest(10, "TOTAL_PORTFOLIO_VALUE")
         fig2 = px.bar(
             top_misaligned,
@@ -102,11 +102,11 @@ with portfolio_subtabs[0]:
         st.plotly_chart(fig2, use_container_width=True)
 
     else:
-        st.success("✅ All portfolios are aligned with client risk tolerance!")
+        st.success(" All portfolios are aligned with client risk tolerance!")
 
 # Portfolio Drift Analysis
 with portfolio_subtabs[1]:
-    st.markdown("### 📊 Portfolio Drift & Rebalancing")
+    st.markdown("### Portfolio Drift & Rebalancing")
     st.caption(
         "Alert on asset-class drift vs strategy | KPIs: Drift % over threshold, rebalance yield"
     )
@@ -116,7 +116,7 @@ with portfolio_subtabs[1]:
         col1, col2 = st.columns(2)
 
         with col1:
-            st.markdown("**📊 Portfolio Drift Analysis**")
+            st.markdown("**Portfolio Drift Analysis**")
             st.dataframe(drift_analysis, use_container_width=True)
 
         with col2:
@@ -136,7 +136,7 @@ with portfolio_subtabs[1]:
             st.plotly_chart(fig, use_container_width=True)
 
         # Asset Class Drift Analysis
-        st.markdown("**📈 Asset Class Drift Patterns**")
+        st.markdown("** Asset Class Drift Patterns**")
         asset_drift = (
             drift_analysis.groupby("ASSET_CLASS")
             .agg({"DRIFT_PCT": ["mean", "max", "count"], "CURRENT_VALUE": "sum"})
@@ -176,7 +176,7 @@ with portfolio_subtabs[1]:
         # Rebalancing Recommendations
         high_drift = drift_analysis[drift_analysis["DRIFT_LEVEL"] == "High"]
         if not high_drift.empty:
-            st.markdown("**🎯 Immediate Rebalancing Required**")
+            st.markdown("** Immediate Rebalancing Required**")
             st.error(
                 f"Found {len(high_drift)} portfolios with high drift requiring immediate rebalancing"
             )
@@ -195,11 +195,11 @@ with portfolio_subtabs[1]:
             )
 
     else:
-        st.success("✅ All portfolios are within acceptable drift thresholds!")
+        st.success(" All portfolios are within acceptable drift thresholds!")
 
 # Idle Cash Management
 with portfolio_subtabs[2]:
-    st.markdown("### 💰 Idle Cash & Cash-Sweep Analysis")
+    st.markdown("### Idle Cash & Cash-Sweep Analysis")
     st.caption("Monetize idle balances | KPIs: Cash ratio, NII uplift")
 
     idle_cash = get_idle_cash_analysis()
@@ -207,7 +207,7 @@ with portfolio_subtabs[2]:
         col1, col2 = st.columns([2, 1])
 
         with col1:
-            st.markdown("**💰 Idle Cash Opportunities**")
+            st.markdown("** Idle Cash Opportunities**")
             st.dataframe(idle_cash, use_container_width=True)
 
         with col2:
@@ -229,11 +229,11 @@ with portfolio_subtabs[2]:
             # Summary metrics
             total_idle_cash = idle_cash["CASH_BALANCE"].sum()
             potential_income = idle_cash["POTENTIAL_ANNUAL_INCOME"].sum()
-            st.metric("💰 Total Idle Cash", f"${total_idle_cash:,.0f}")
-            st.metric("📈 Potential Income", f"${potential_income:,.0f}")
+            st.metric("Total Idle Cash", f"${total_idle_cash:,.0f}")
+            st.metric("Potential Income", f"${potential_income:,.0f}")
 
         # Cash Analysis by Portfolio Strategy
-        st.markdown("**📊 Cash Analysis by Strategy Type**")
+        st.markdown("** Cash Analysis by Strategy Type**")
         strategy_analysis = (
             idle_cash.groupby("STRATEGY_TYPE")
             .agg(
@@ -273,7 +273,7 @@ with portfolio_subtabs[2]:
         # High Priority Cash Sweep
         high_priority = idle_cash[idle_cash["SWEEP_PRIORITY"] == "High Priority"]
         if not high_priority.empty:
-            st.markdown("**🚨 High Priority Cash Sweep Opportunities**")
+            st.markdown("** High Priority Cash Sweep Opportunities**")
             st.warning(f"Found {len(high_priority)} portfolios with high cash balances")
             total_high_priority_cash = high_priority["CASH_BALANCE"].sum()
             potential_high_priority_income = high_priority[
@@ -287,11 +287,11 @@ with portfolio_subtabs[2]:
             )
 
     else:
-        st.success("✅ No significant idle cash balances identified!")
+        st.success(" No significant idle cash balances identified!")
 
 # Transaction Anomalies
 with portfolio_subtabs[3]:
-    st.markdown("### 🔍 Trade & Transaction Anomaly Detection")
+    st.markdown("### Trade & Transaction Anomaly Detection")
     st.caption(
         "Catch unusual patterns and operational outliers | KPIs: Transaction integrity, operational risk detection"
     )
@@ -301,7 +301,7 @@ with portfolio_subtabs[3]:
         col1, col2 = st.columns([2, 1])
 
         with col1:
-            st.markdown("**⚠️ Recent Transaction Anomalies**")
+            st.markdown("** Recent Transaction Anomalies**")
             st.dataframe(anomalies_df, use_container_width=True)
 
         with col2:
@@ -315,7 +315,7 @@ with portfolio_subtabs[3]:
             st.plotly_chart(fig, use_container_width=True)
 
         # Transaction Analysis
-        st.markdown("**📊 Transaction Anomaly Analysis**")
+        st.markdown("** Transaction Anomaly Analysis**")
         fig2 = px.scatter(
             anomalies_df,
             x="TOTAL_AMOUNT",
@@ -350,7 +350,7 @@ with portfolio_subtabs[3]:
             )
         ]
         if not critical_anomalies.empty:
-            st.markdown("**🚨 Critical Anomalies Requiring Investigation**")
+            st.markdown("** Critical Anomalies Requiring Investigation**")
             st.error(f"Found {len(critical_anomalies)} critical transaction anomalies")
             st.dataframe(
                 critical_anomalies[
@@ -366,11 +366,11 @@ with portfolio_subtabs[3]:
             )
 
     else:
-        st.success("✅ No transaction anomalies detected in the last 90 days.")
+        st.success(" No transaction anomalies detected in the last 90 days.")
 
 # Advisor Performance
 with portfolio_subtabs[4]:
-    st.markdown("### 👥 Advisor Productivity & Coverage")
+    st.markdown("### Advisor Productivity & Coverage")
     st.caption(
         "Improve book management & cadences | KPIs: Coverage %, last-contact SLA, meetings/client"
     )
@@ -383,7 +383,7 @@ with portfolio_subtabs[4]:
         col1, col2 = st.columns(2)
 
         with col1:
-            st.markdown("**👥 Advisor Performance Metrics**")
+            st.markdown("** Advisor Performance Metrics**")
             st.dataframe(advisor_data, use_container_width=True)
 
         with col2:
@@ -399,7 +399,7 @@ with portfolio_subtabs[4]:
             st.plotly_chart(fig, use_container_width=True)
 
         # Advisor Efficiency Analysis
-        st.markdown("**📊 Advisor Efficiency Metrics**")
+        st.markdown("** Advisor Efficiency Metrics**")
         efficiency_col1, efficiency_col2 = st.columns(2)
 
         with efficiency_col1:
@@ -430,7 +430,7 @@ with portfolio_subtabs[4]:
             st.plotly_chart(fig3, use_container_width=True)
 
         # Specialization Analysis
-        st.markdown("**🎯 Performance by Specialization**")
+        st.markdown("** Performance by Specialization**")
         specialization_analysis = (
             advisor_data.groupby("SPECIALIZATION")
             .agg(
@@ -456,14 +456,14 @@ with portfolio_subtabs[4]:
         col_top, col_bottom = st.columns(2)
 
         with col_top:
-            st.markdown("**🏆 Top Performers (by AUM)**")
+            st.markdown("** Top Performers (by AUM)**")
             top_performers = advisor_data.nlargest(5, "TOTAL_AUM")[
                 ["ADVISOR_NAME", "TOTAL_AUM", "TOTAL_CLIENTS"]
             ]
             st.dataframe(top_performers, use_container_width=True, hide_index=True)
 
         with col_bottom:
-            st.markdown("**📈 Growth Opportunities (by Interactions/Client)**")
+            st.markdown("** Growth Opportunities (by Interactions/Client)**")
             low_engagement = advisor_data.nsmallest(5, "INTERACTIONS_PER_CLIENT")[
                 ["ADVISOR_NAME", "INTERACTIONS_PER_CLIENT", "TOTAL_CLIENTS"]
             ]
@@ -474,12 +474,12 @@ with portfolio_subtabs[4]:
 
 # Summary Dashboard
 st.divider()
-st.markdown("### 📋 **Portfolio Management Summary**")
+st.markdown("### **Portfolio Management Summary**")
 
 summary_col1, summary_col2, summary_col3, summary_col4 = st.columns(4)
 
 with summary_col1:
-    st.markdown("#### ⚖️ **Risk Alerts**")
+    st.markdown("#### **Risk Alerts**")
     if not suitability_alerts.empty:
         total_alerts = len(suitability_alerts)
         high_risk_alerts = len(
@@ -489,7 +489,7 @@ with summary_col1:
         st.metric("High Priority", high_risk_alerts)
 
 with summary_col2:
-    st.markdown("#### 📊 **Drift Analysis**")
+    st.markdown("#### **Drift Analysis**")
     if not drift_analysis.empty:
         total_drift = len(drift_analysis)
         high_drift = len(drift_analysis[drift_analysis["DRIFT_LEVEL"] == "High"])
@@ -497,7 +497,7 @@ with summary_col2:
         st.metric("High Drift", high_drift)
 
 with summary_col3:
-    st.markdown("#### 💰 **Cash Optimization**")
+    st.markdown("#### **Cash Optimization**")
     if not idle_cash.empty:
         total_cash = idle_cash["CASH_BALANCE"].sum()
         potential_income = idle_cash["POTENTIAL_ANNUAL_INCOME"].sum()
@@ -505,7 +505,7 @@ with summary_col3:
         st.metric("Potential Income", f"${potential_income:,.0f}")
 
 with summary_col4:
-    st.markdown("#### 🔍 **Anomalies**")
+    st.markdown("#### **Anomalies**")
     if not anomalies_df.empty:
         total_anomalies = len(anomalies_df)
         critical_count = len(

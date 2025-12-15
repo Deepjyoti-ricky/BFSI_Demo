@@ -14,16 +14,16 @@ import streamlit as st
 
 from utils.data_functions import get_client_geographic_distribution
 
-st.set_page_config(page_title="Geographic Insights", page_icon="🌍", layout="wide")
+st.set_page_config(page_title="Geographic Insights", page_icon=None, layout="wide")
 
 # Page header
-st.markdown("# 🚀 Advanced Capabilities")
+st.markdown("# Advanced Capabilities")
 st.caption(
-    "🚀 **Advanced analytics: geospatial intelligence, climate risk, and predictive modeling with Snowflake Marketplace data**"
+    " **Advanced analytics: geospatial intelligence, climate risk, and predictive modeling with Snowflake Marketplace data**"
 )
 
 # Geographic Distribution Analysis
-st.markdown("### 🗺️ Geographic Distribution & Market Concentration")
+st.markdown("### Geographic Distribution & Market Concentration")
 geo_dist_df = get_client_geographic_distribution()
 
 if not geo_dist_df.empty:
@@ -31,7 +31,7 @@ if not geo_dist_df.empty:
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown("**🏆 Top States by AUM**")
+        st.markdown("** Top States by AUM**")
         top_states = geo_dist_df.head(10)
         fig1 = px.bar(
             top_states,
@@ -44,7 +44,7 @@ if not geo_dist_df.empty:
         st.plotly_chart(fig1, use_container_width=True)
 
     with col2:
-        st.markdown("**📊 Market Tier Distribution**")
+        st.markdown("** Market Tier Distribution**")
         market_tier_counts = geo_dist_df["MARKET_TIER"].value_counts()
         fig2 = px.pie(
             values=market_tier_counts.values,
@@ -59,11 +59,11 @@ if not geo_dist_df.empty:
         st.plotly_chart(fig2, use_container_width=True)
 
     # Geographic metrics table
-    st.markdown("**📋 State-by-State Analysis**")
+    st.markdown("** State-by-State Analysis**")
     st.dataframe(geo_dist_df, use_container_width=True)
 
     # Risk tolerance by geography
-    st.markdown("**⚖️ Risk Tolerance Geographic Distribution**")
+    st.markdown("** Risk Tolerance Geographic Distribution**")
     fig3 = px.scatter(
         geo_dist_df,
         x="PCT_CONSERVATIVE",
@@ -84,7 +84,7 @@ else:
 
 # Interactive Maps Section
 st.divider()
-st.markdown("### 🗺️ **Interactive 3D Visualizations**")
+st.markdown("### **Interactive 3D Visualizations**")
 
 
 # Simulated location data for demonstration
@@ -199,12 +199,10 @@ def get_demo_location_data():
 
 
 # Map visualizations
-map_subtabs = st.tabs(
-    ["🏘️ Client Distribution", "🌡️ Climate Risk", "👥 Advisor Coverage"]
-)
+map_subtabs = st.tabs([" Client Distribution", " Climate Risk", " Advisor Coverage"])
 
 with map_subtabs[0]:
-    st.markdown("### 🏘️ Client Location & Portfolio Distribution")
+    st.markdown("### Client Location & Portfolio Distribution")
 
     client_locations = get_demo_location_data()
 
@@ -259,7 +257,7 @@ with map_subtabs[0]:
     )
 
 with map_subtabs[1]:
-    st.markdown("### 🌡️ Climate Risk Heat Map")
+    st.markdown("### Climate Risk Heat Map")
 
     # Simulated climate risk data
     climate_risk_data = [
@@ -379,7 +377,7 @@ with map_subtabs[1]:
     )
 
 with map_subtabs[2]:
-    st.markdown("### 👥 Advisor Territory Coverage")
+    st.markdown("### Advisor Territory Coverage")
 
     # Simulated advisor data
     advisor_data = [
@@ -517,18 +515,18 @@ with map_subtabs[2]:
     )
 
 # Map Legend
-st.markdown("### 🎨 Map Legend")
+st.markdown("### Map Legend")
 col1, col2, col3 = st.columns(3)
 
 with col1:
     st.markdown(
         """
-    **Client Location Map**
-    - 🔵 Conservative (Steel Blue)
+   **Client Location Map**
+    -  Conservative (Steel Blue)
     - 🟠 Moderate (Orange)
     - 🟢 Balanced (Green)
-    - 🔴 Growth (Tomato)
-    - ⚫ Aggressive Growth (Crimson)
+    -  Growth (Tomato)
+    -  Aggressive Growth (Crimson)
     - *Size = Portfolio Value*
     """
     )
@@ -536,8 +534,8 @@ with col1:
 with col2:
     st.markdown(
         """
-    **Climate Risk Map**
-    - 🔴 Very High Risk
+   **Climate Risk Map**
+    -  Very High Risk
     - 🟠 High Risk
     - 🟡 Medium Risk
     - 🟢 Low Risk
@@ -548,31 +546,31 @@ with col2:
 with col3:
     st.markdown(
         """
-    **Advisor Coverage Map**
-    - 🔴 National Coverage
+   **Advisor Coverage Map**
+    -  National Coverage
     - 🟠 Regional Coverage
     - 🟢 State Coverage
-    - 🔵 Local Coverage
+    -  Local Coverage
     - *Hexagons = AUM Density*
     """
     )
 
 # Geographic Analytics Summary
 st.divider()
-st.markdown("### 📊 **Geographic Analytics Summary**")
+st.markdown("### **Geographic Analytics Summary**")
 
 if not geo_dist_df.empty:
     geo_col1, geo_col2, geo_col3, geo_col4 = st.columns(4)
 
     with geo_col1:
-        st.markdown("#### 🏆 **Top Market**")
+        st.markdown("#### **Top Market**")
         top_state = geo_dist_df.iloc[0]
         st.metric("State", top_state["STATE"])
         st.metric("AUM", f"${top_state['TOTAL_AUM']:,.0f}")
         st.metric("Clients", f"{top_state['CLIENT_COUNT']:,}")
 
     with geo_col2:
-        st.markdown("#### 🌍 **Market Coverage**")
+        st.markdown("#### **Market Coverage**")
         total_states = len(geo_dist_df)
         high_value_markets = len(
             geo_dist_df[geo_dist_df["MARKET_TIER"] == "High Value Market"]
@@ -582,14 +580,14 @@ if not geo_dist_df.empty:
         st.metric("Coverage Rate", f"{high_value_markets/total_states*100:.1f}%")
 
     with geo_col3:
-        st.markdown("#### ⚖️ **Risk Profile**")
+        st.markdown("#### **Risk Profile**")
         avg_conservative = geo_dist_df["PCT_CONSERVATIVE"].mean()
         avg_aggressive = geo_dist_df["PCT_AGGRESSIVE"].mean()
         st.metric("Avg Conservative %", f"{avg_conservative:.1f}%")
         st.metric("Avg Aggressive %", f"{avg_aggressive:.1f}%")
 
     with geo_col4:
-        st.markdown("#### 🌡️ **Climate Exposure**")
+        st.markdown("#### **Climate Exposure**")
         # Simulated climate metrics
         st.metric("High Risk States", "4")
         st.metric("Exposed AUM", "$705M")

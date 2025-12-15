@@ -1,0 +1,743 @@
+# Wealth 360 Semantic Model
+# Database: FSI_DEMOS | Schema: WEALTH_360
+# This model defines the data structure for the Wealth 360 Analytics Platform
+
+name: WEALTH360
+description: >
+  Comprehensive wealth management semantic model supporting client analytics,
+  portfolio management, advisor relationships, and transaction intelligence.
+
+database: FSI_DEMOS
+schema: WEALTH_360
+
+tables:
+  - name: ACCOUNTS
+    description: >
+      Financial accounts managed within the wealth management system.
+      Each record represents a single account with classification, status, and balance information.
+    base_table:
+      database: FSI_DEMOS
+      schema: WEALTH_360
+      table: ACCOUNTS
+    dimensions:
+      - name: ACCOUNT_ID
+        description: Unique identifier for each account.
+        expr: ACCOUNT_ID
+        data_type: VARCHAR
+        sample_values:
+          - ACC_AEC6AFC6B105
+          - ACC_3DBAD3640115
+          - ACC_8FA5C30AC6F1
+      - name: ACCOUNT_NAME
+        description: Names of financial accounts including savings, checking, and investment accounts.
+        expr: ACCOUNT_NAME
+        data_type: VARCHAR
+        sample_values:
+          - Investment Account 654
+          - Investment Account 543
+          - Savings Account 906
+      - name: ACCOUNT_TYPE
+        description: The type of financial account held by the customer.
+        expr: ACCOUNT_TYPE
+        data_type: VARCHAR
+        sample_values:
+          - Checking
+          - Savings
+          - Investment
+      - name: CLIENT_ID
+        description: Unique identifier for each client in the system.
+        expr: CLIENT_ID
+        data_type: VARCHAR
+        sample_values:
+          - CL_E8579EE274
+          - CL_2C72DED3C5
+          - CL_74F3248C6E
+      - name: CURRENCY
+        description: The currency used for the account.
+        expr: CURRENCY
+        data_type: VARCHAR
+        sample_values:
+          - USD
+      - name: STATUS
+        description: The current status of the account.
+        expr: STATUS
+        data_type: VARCHAR
+        sample_values:
+          - Active
+    time_dimensions:
+      - name: LAST_UPDATE_TIMESTAMP
+        description: The timestamp when the account record was last updated.
+        expr: LAST_UPDATE_TIMESTAMP
+        data_type: TIMESTAMP_NTZ
+        sample_values:
+          - 2025-04-10T00:00:00.000+0000
+      - name: OPEN_DATE
+        description: The date and time when the account was opened.
+        expr: OPEN_DATE
+        data_type: TIMESTAMP_NTZ
+        sample_values:
+          - 2024-11-16T22:57:33.180+0000
+          - 2024-08-30T00:22:09.532+0000
+          - 2023-03-14T14:40:20.677+0000
+    facts:
+      - name: INITIAL_BALANCE
+        description: The initial balance amount when the account was opened.
+        expr: INITIAL_BALANCE
+        data_type: NUMBER
+        sample_values:
+          - '886106.83'
+          - '2253444.26'
+          - '107324.27'
+
+  - name: ACCOUNT_HISTORY
+    description: >
+      Records of account balance changes over time. Each record represents
+      a snapshot of an account's balance at a specific point in time.
+    base_table:
+      database: FSI_DEMOS
+      schema: WEALTH_360
+      table: ACCOUNT_HISTORY
+    dimensions:
+      - name: ACCOUNT_ID
+        description: Unique identifier for financial accounts.
+        expr: ACCOUNT_ID
+        data_type: VARCHAR
+        sample_values:
+          - ACC_3DBAD3640115
+          - ACC_52BFC1886EB0
+          - ACC_EFC1A24A4F45
+      - name: CURRENCY
+        description: The currency used for the account transactions and balances.
+        expr: CURRENCY
+        data_type: VARCHAR
+        sample_values:
+          - USD
+      - name: HISTORY_ID
+        description: Unique identifier for each account history record.
+        expr: HISTORY_ID
+        data_type: VARCHAR
+        sample_values:
+          - fbf80fa1202d4bbdb62458959b9b236e
+          - d8f5832b95604d4eada819478af72d52
+          - 97bfe61a42f740c9b7e9e337eeb95348
+    time_dimensions:
+      - name: TIMESTAMP
+        description: The date and time when the account history record was created or updated.
+        expr: TIMESTAMP
+        data_type: TIMESTAMP_NTZ
+        sample_values:
+          - 2023-09-10T10:58:00.000+0000
+          - 2024-08-30T00:22:09.532+0000
+          - 2021-10-16T09:06:50.782+0000
+    facts:
+      - name: BALANCE
+        description: Account balance amount in monetary units.
+        expr: BALANCE
+        data_type: NUMBER
+        sample_values:
+          - '3881.58'
+          - '5791.07'
+          - '54063.46'
+
+  - name: ADVISORS
+    description: >
+      Financial advisors within the organization. Each record represents an
+      individual advisor with their professional background, expertise, and tenure.
+    base_table:
+      database: FSI_DEMOS
+      schema: WEALTH_360
+      table: ADVISORS
+    dimensions:
+      - name: ADVISOR_ID
+        description: Unique identifier for financial advisors.
+        expr: ADVISOR_ID
+        data_type: VARCHAR
+        sample_values:
+          - ADV_842114FF
+          - ADV_CE1B12DA
+          - ADV_B160421A
+      - name: EXPERIENCE_YEARS
+        description: The number of years of professional experience for the advisor.
+        expr: EXPERIENCE_YEARS
+        data_type: NUMBER
+        sample_values:
+          - '20'
+          - '17'
+          - '22'
+      - name: NAME
+        description: The name of the financial advisor.
+        expr: NAME
+        data_type: VARCHAR
+        sample_values:
+          - Ricky Maldonado
+          - Melissa Gilbert
+          - Christopher Hall
+      - name: REGION
+        description: Geographic regions where advisors are located.
+        expr: REGION
+        data_type: VARCHAR
+        sample_values:
+          - Michigan
+          - Indiana
+          - Arizona
+      - name: SPECIALIZATION
+        description: The area of financial expertise or specialty that the advisor focuses on.
+        expr: SPECIALIZATION
+        data_type: VARCHAR
+        sample_values:
+          - Risk Management
+          - Tax Strategy
+          - Comprehensive Financial Planning
+    time_dimensions:
+      - name: CREATED_TIMESTAMP
+        description: The timestamp when the advisor record was created in the system.
+        expr: CREATED_TIMESTAMP
+        data_type: TIMESTAMP_NTZ
+        sample_values:
+          - 2017-02-21T20:16:22.897+0000
+          - 2017-02-16T10:19:49.988+0000
+          - 2015-06-03T00:49:20.216+0000
+
+  - name: ADVISOR_CLIENT_RELATIONSHIPS
+    description: >
+      Relationships between financial advisors and their clients. Each record
+      represents a single advisor-client pairing with relationship timing and status.
+    base_table:
+      database: FSI_DEMOS
+      schema: WEALTH_360
+      table: ADVISOR_CLIENT_RELATIONSHIPS
+    dimensions:
+      - name: ADVISOR_ID
+        description: Unique identifier for financial advisors in the wealth management system.
+        expr: ADVISOR_ID
+        data_type: VARCHAR
+        sample_values:
+          - ADV_85BD3AD7
+          - ADV_6733977C
+          - ADV_E4F39C7F
+      - name: CLIENT_ID
+        description: Unique identifier for each client in the advisor-client relationship.
+        expr: CLIENT_ID
+        data_type: VARCHAR
+        sample_values:
+          - CL_E8579EE274
+          - CL_2C72DED3C5
+          - CL_74F3248C6E
+      - name: RELATIONSHIP_ID
+        description: Unique identifier for the relationship between an advisor and client.
+        expr: RELATIONSHIP_ID
+        data_type: VARCHAR
+        sample_values:
+          - dff15e0e04314681991537f017347ccb
+          - a49cda66cd8e407daface4b59d725f81
+          - 69dca0557e76425b93082159f232f80a
+      - name: STATUS
+        description: The current status of the advisor-client relationship.
+        expr: STATUS
+        data_type: VARCHAR
+        sample_values:
+          - Active
+    time_dimensions:
+      - name: LAST_CONTACT_DATE
+        description: The date and time when the advisor last contacted the client.
+        expr: LAST_CONTACT_DATE
+        data_type: TIMESTAMP_NTZ
+        sample_values:
+          - 2023-09-09T18:02:38.561+0000
+          - 2023-10-15T09:34:30.389+0000
+          - 2024-10-12T03:22:16.262+0000
+      - name: START_DATE
+        description: The date and time when the advisor-client relationship began.
+        expr: START_DATE
+        data_type: TIMESTAMP_NTZ
+        sample_values:
+          - 2025-04-17T10:43:18.282+0000
+          - 2024-09-09T22:48:33.352+0000
+          - 2025-04-11T23:54:11.984+0000
+
+  - name: CLIENTS
+    description: >
+      Individual clients and their personal and financial profiles. Includes
+      demographic information, contact details, wealth indicators, and investment preferences.
+    base_table:
+      database: FSI_DEMOS
+      schema: WEALTH_360
+      table: CLIENTS
+    dimensions:
+      - name: ADDRESS
+        description: Street addresses for client locations.
+        expr: ADDRESS
+        data_type: VARCHAR
+        sample_values:
+          - 543 Melissa Branch Apt. 066
+          - 02327 Miguel Crest
+          - 015 Day Islands
+      - name: AGE
+        description: The age of the client in years.
+        expr: AGE
+        data_type: NUMBER
+        sample_values:
+          - '32'
+          - '44'
+          - '26'
+      - name: ANNUAL_INCOME
+        description: Annual income of the client.
+        expr: ANNUAL_INCOME
+        data_type: NUMBER
+        sample_values:
+          - '133413'
+          - '435549'
+          - '485073'
+      - name: CITY
+        description: The city where the client is located.
+        expr: CITY
+        data_type: VARCHAR
+        sample_values:
+          - East Jonathan
+          - Laraport
+          - Nancyside
+      - name: CLIENT_ID
+        description: Unique identifier for each client in the system.
+        expr: CLIENT_ID
+        data_type: VARCHAR
+        sample_values:
+          - CL_E8579EE274
+          - CL_2C72DED3C5
+          - CL_74F3248C6E
+      - name: COUNTRY
+        description: The country where the client is located.
+        expr: COUNTRY
+        data_type: VARCHAR
+        sample_values:
+          - USA
+      - name: EMAIL
+        description: Email addresses of clients.
+        expr: EMAIL
+        data_type: VARCHAR
+        sample_values:
+          - sarahhendricks@example.com
+          - brendandavis@example.com
+          - elizabeth91@example.com
+      - name: FINANCIAL_GOALS
+        description: Financial goals or objectives that clients are working towards.
+        expr: FINANCIAL_GOALS
+        data_type: VARCHAR
+        sample_values:
+          - '["Education Funding", "Income Generation"]'
+          - '["Home Purchase", "Retirement Planning"]'
+          - '["Income Generation", "Home Purchase"]'
+      - name: FIRST_NAME
+        description: The first name of the client.
+        expr: FIRST_NAME
+        data_type: VARCHAR
+        sample_values:
+          - Caitlin
+          - Amanda
+          - Alan
+      - name: GENDER
+        description: The gender identity of the client.
+        expr: GENDER
+        data_type: VARCHAR
+        sample_values:
+          - Prefer not to say
+          - Other
+          - Female
+      - name: LAST_NAME
+        description: The last name or surname of the client.
+        expr: LAST_NAME
+        data_type: VARCHAR
+        sample_values:
+          - Huffman
+          - Thomas
+          - Rojas
+      - name: LIFE_EVENT
+        description: Significant life events that may impact financial planning needs.
+        expr: LIFE_EVENT
+        data_type: VARCHAR
+        sample_values:
+          - Birth of Child
+          - Home Purchase
+      - name: MARITAL_STATUS
+        description: The marital status of the client.
+        expr: MARITAL_STATUS
+        data_type: VARCHAR
+        sample_values:
+          - Widowed
+          - Divorced
+          - Single
+      - name: NET_WORTH_ESTIMATE
+        description: Estimated net worth of the client.
+        expr: NET_WORTH_ESTIMATE
+        data_type: NUMBER
+        sample_values:
+          - '7603803'
+          - '1249985'
+          - '7561345'
+      - name: OCCUPATION
+        description: The professional occupation or job title of the client.
+        expr: OCCUPATION
+        data_type: VARCHAR
+        sample_values:
+          - Microbiologist
+          - Medical illustrator
+          - Environmental consultant
+      - name: PHONE_NUMBER
+        description: Phone numbers for client contact information.
+        expr: PHONE_NUMBER
+        data_type: VARCHAR
+        sample_values:
+          - 474.554.2796x60843
+          - 540.815.1599
+          - 337-515-7010
+      - name: RISK_TOLERANCE
+        description: Risk tolerance level indicating investor's willingness to accept potential losses.
+        expr: RISK_TOLERANCE
+        data_type: VARCHAR
+        sample_values:
+          - Moderate
+          - Aggressive Growth
+          - Conservative
+      - name: STATE
+        description: United States state abbreviations.
+        expr: STATE
+        data_type: VARCHAR
+        sample_values:
+          - IN
+          - AR
+          - WI
+      - name: ZIP_CODE
+        description: Postal ZIP codes for client addresses.
+        expr: ZIP_CODE
+        data_type: NUMBER
+        sample_values:
+          - '98549'
+          - '33348'
+          - '10288'
+    time_dimensions:
+      - name: BIRTH_DATE
+        description: The birth date of the client.
+        expr: BIRTH_DATE
+        data_type: DATE
+        sample_values:
+          - '1992-10-13'
+          - '1980-08-04'
+          - '1985-11-05'
+      - name: JOIN_DATE
+        description: The date and time when the client joined or was onboarded.
+        expr: JOIN_DATE
+        data_type: TIMESTAMP_NTZ
+        sample_values:
+          - 2025-02-17T16:00:17.468+0000
+          - 2022-07-26T14:22:58.588+0000
+          - 2020-10-25T09:30:27.974+0000
+      - name: LAST_UPDATE_TIMESTAMP
+        description: The timestamp when the client record was last updated.
+        expr: LAST_UPDATE_TIMESTAMP
+        data_type: TIMESTAMP_NTZ
+        sample_values:
+          - 2025-02-25T13:32:03.272+0000
+          - 2024-09-05T01:25:28.293+0000
+          - 2025-03-17T19:51:34.556+0000
+
+  - name: INTERACTIONS
+    description: >
+      Client interaction records including meetings, calls, emails, and notes.
+      Used for engagement tracking and sentiment analysis.
+    base_table:
+      database: FSI_DEMOS
+      schema: WEALTH_360
+      table: INTERACTIONS
+    dimensions:
+      - name: INTERACTION_ID
+        description: Unique identifier for each interaction record.
+        expr: INTERACTION_ID
+        data_type: VARCHAR
+      - name: CLIENT_ID
+        description: Client associated with the interaction.
+        expr: CLIENT_ID
+        data_type: VARCHAR
+      - name: ADVISOR_ID
+        description: Advisor who conducted the interaction.
+        expr: ADVISOR_ID
+        data_type: VARCHAR
+      - name: INTERACTION_TYPE
+        description: Type of interaction (Meeting, Call, Email, etc.).
+        expr: INTERACTION_TYPE
+        data_type: VARCHAR
+      - name: OUTCOME_NOTES
+        description: Notes and outcomes from the interaction for sentiment analysis.
+        expr: OUTCOME_NOTES
+        data_type: VARCHAR
+    time_dimensions:
+      - name: INTERACTION_DATE
+        description: Date and time of the interaction.
+        expr: INTERACTION_DATE
+        data_type: TIMESTAMP_NTZ
+
+  - name: PORTFOLIOS
+    description: >
+      Investment portfolios associated with client accounts. Contains portfolio
+      strategy, risk profile, and asset allocation information.
+    base_table:
+      database: FSI_DEMOS
+      schema: WEALTH_360
+      table: PORTFOLIOS
+    dimensions:
+      - name: PORTFOLIO_ID
+        description: Unique identifier for each portfolio.
+        expr: PORTFOLIO_ID
+        data_type: VARCHAR
+      - name: ACCOUNT_ID
+        description: Account associated with the portfolio.
+        expr: ACCOUNT_ID
+        data_type: VARCHAR
+      - name: PORTFOLIO_NAME
+        description: Name or label for the portfolio.
+        expr: PORTFOLIO_NAME
+        data_type: VARCHAR
+      - name: STRATEGY
+        description: Investment strategy (Growth, Income, Balanced, etc.).
+        expr: STRATEGY
+        data_type: VARCHAR
+      - name: RISK_PROFILE
+        description: Risk profile of the portfolio.
+        expr: RISK_PROFILE
+        data_type: VARCHAR
+
+  - name: POSITION_HISTORY
+    description: >
+      Historical position data for portfolio holdings. Tracks asset positions
+      over time for drift analysis and rebalancing.
+    base_table:
+      database: FSI_DEMOS
+      schema: WEALTH_360
+      table: POSITION_HISTORY
+    dimensions:
+      - name: POSITION_ID
+        description: Unique identifier for the position record.
+        expr: POSITION_ID
+        data_type: VARCHAR
+      - name: PORTFOLIO_ID
+        description: Portfolio containing the position.
+        expr: PORTFOLIO_ID
+        data_type: VARCHAR
+      - name: ASSET_CLASS
+        description: Asset class of the position (Equity, Fixed Income, Cash, etc.).
+        expr: ASSET_CLASS
+        data_type: VARCHAR
+      - name: SECURITY_ID
+        description: Security or instrument identifier.
+        expr: SECURITY_ID
+        data_type: VARCHAR
+    time_dimensions:
+      - name: AS_OF_DATE
+        description: Date of the position snapshot.
+        expr: AS_OF_DATE
+        data_type: DATE
+    facts:
+      - name: QUANTITY
+        description: Number of units/shares held.
+        expr: QUANTITY
+        data_type: NUMBER
+      - name: MARKET_VALUE
+        description: Current market value of the position.
+        expr: MARKET_VALUE
+        data_type: NUMBER
+
+  - name: TRANSACTIONS
+    description: >
+      Financial transactions including trades, deposits, withdrawals, and transfers.
+      Used for transaction monitoring and anomaly detection.
+    base_table:
+      database: FSI_DEMOS
+      schema: WEALTH_360
+      table: TRANSACTIONS
+    dimensions:
+      - name: TRANSACTION_ID
+        description: Unique identifier for the transaction.
+        expr: TRANSACTION_ID
+        data_type: VARCHAR
+      - name: ACCOUNT_ID
+        description: Account associated with the transaction.
+        expr: ACCOUNT_ID
+        data_type: VARCHAR
+      - name: TRANSACTION_TYPE
+        description: Type of transaction (Buy, Sell, Deposit, Withdrawal, etc.).
+        expr: TRANSACTION_TYPE
+        data_type: VARCHAR
+      - name: STATUS
+        description: Transaction status (Completed, Pending, Failed).
+        expr: STATUS
+        data_type: VARCHAR
+    time_dimensions:
+      - name: TRANSACTION_DATE
+        description: Date and time of the transaction.
+        expr: TRANSACTION_DATE
+        data_type: TIMESTAMP_NTZ
+    facts:
+      - name: AMOUNT
+        description: Transaction amount.
+        expr: AMOUNT
+        data_type: NUMBER
+      - name: FEE
+        description: Transaction fee charged.
+        expr: FEE
+        data_type: NUMBER
+
+  - name: MARKET_EVENTS
+    description: >
+      Market events and economic indicators that may impact client portfolios
+      and trigger outreach opportunities.
+    base_table:
+      database: FSI_DEMOS
+      schema: WEALTH_360
+      table: MARKET_EVENTS
+    dimensions:
+      - name: EVENT_ID
+        description: Unique identifier for the market event.
+        expr: EVENT_ID
+        data_type: VARCHAR
+      - name: EVENT_TYPE
+        description: Type of market event (Economic, Geopolitical, Regulatory, etc.).
+        expr: EVENT_TYPE
+        data_type: VARCHAR
+      - name: SEVERITY
+        description: Impact severity of the event.
+        expr: SEVERITY
+        data_type: VARCHAR
+      - name: DESCRIPTION
+        description: Description of the market event.
+        expr: DESCRIPTION
+        data_type: VARCHAR
+    time_dimensions:
+      - name: EVENT_DATE
+        description: Date of the market event.
+        expr: EVENT_DATE
+        data_type: DATE
+
+# Relationships between tables
+relationships:
+  - name: account_to_client
+    from_table: ACCOUNTS
+    from_column: CLIENT_ID
+    to_table: CLIENTS
+    to_column: CLIENT_ID
+    type: many_to_one
+
+  - name: account_history_to_account
+    from_table: ACCOUNT_HISTORY
+    from_column: ACCOUNT_ID
+    to_table: ACCOUNTS
+    to_column: ACCOUNT_ID
+    type: many_to_one
+
+  - name: advisor_relationship_to_client
+    from_table: ADVISOR_CLIENT_RELATIONSHIPS
+    from_column: CLIENT_ID
+    to_table: CLIENTS
+    to_column: CLIENT_ID
+    type: many_to_one
+
+  - name: advisor_relationship_to_advisor
+    from_table: ADVISOR_CLIENT_RELATIONSHIPS
+    from_column: ADVISOR_ID
+    to_table: ADVISORS
+    to_column: ADVISOR_ID
+    type: many_to_one
+
+  - name: interaction_to_client
+    from_table: INTERACTIONS
+    from_column: CLIENT_ID
+    to_table: CLIENTS
+    to_column: CLIENT_ID
+    type: many_to_one
+
+  - name: portfolio_to_account
+    from_table: PORTFOLIOS
+    from_column: ACCOUNT_ID
+    to_table: ACCOUNTS
+    to_column: ACCOUNT_ID
+    type: many_to_one
+
+  - name: position_to_portfolio
+    from_table: POSITION_HISTORY
+    from_column: PORTFOLIO_ID
+    to_table: PORTFOLIOS
+    to_column: PORTFOLIO_ID
+    type: many_to_one
+
+  - name: transaction_to_account
+    from_table: TRANSACTIONS
+    from_column: ACCOUNT_ID
+    to_table: ACCOUNTS
+    to_column: ACCOUNT_ID
+    type: many_to_one
+
+# Persona-specific views (virtual)
+persona_views:
+  chief_investment_officer:
+    primary_tables:
+      - PORTFOLIOS
+      - POSITION_HISTORY
+      - ACCOUNT_HISTORY
+    key_metrics:
+      - Total AUM
+      - Portfolio Drift
+      - Risk Exposure
+      - Asset Allocation
+
+  relationship_manager:
+    primary_tables:
+      - CLIENTS
+      - INTERACTIONS
+      - ADVISOR_CLIENT_RELATIONSHIPS
+    key_metrics:
+      - Client Engagement
+      - Churn Risk
+      - Last Contact Days
+      - Life Events
+
+  compliance_officer:
+    primary_tables:
+      - CLIENTS
+      - PORTFOLIOS
+      - TRANSACTIONS
+    key_metrics:
+      - Suitability Score
+      - Concentration Breaches
+      - KYC Status
+      - Regulatory Alerts
+
+  wealth_advisor:
+    primary_tables:
+      - CLIENTS
+      - PORTFOLIOS
+      - INTERACTIONS
+    key_metrics:
+      - Book Value
+      - Client Count
+      - Pending Actions
+      - Revenue Impact
+
+  operations_manager:
+    primary_tables:
+      - TRANSACTIONS
+      - ADVISORS
+      - ADVISOR_CLIENT_RELATIONSHIPS
+    key_metrics:
+      - Transaction Volume
+      - Advisor Productivity
+      - Process Efficiency
+      - Automation Rate
+
+  executive:
+    primary_tables:
+      - ACCOUNTS
+      - CLIENTS
+      - PORTFOLIOS
+      - TRANSACTIONS
+    key_metrics:
+      - Total AUM
+      - Client Growth
+      - Revenue
+      - Market Position

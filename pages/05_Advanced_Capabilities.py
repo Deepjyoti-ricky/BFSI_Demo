@@ -15,8 +15,15 @@ import pydeck as pdk
 import streamlit as st
 
 from utils.data_functions import get_client_geographic_distribution
+from utils.personas import get_persona_info, get_section_insights
 
 st.set_page_config(page_title="Advanced Capabilities", page_icon=None, layout="wide")
+
+# Get current persona from session state
+selected_persona = st.session_state.get("selected_persona", "executive")
+persona_info = get_persona_info(selected_persona)
+section_insights = get_section_insights("advanced_capabilities", selected_persona)
+
 
 # Sidebar - Advanced Analytics Configuration
 st.sidebar.markdown("## **Advanced Configuration**")

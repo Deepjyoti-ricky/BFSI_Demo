@@ -13,11 +13,27 @@ import plotly.express as px
 import streamlit as st
 
 from utils.data_functions import get_customer_360_segments, get_global_kpis
+from utils.personas import get_persona_info, get_section_insights
 
 st.set_page_config(page_title="Business Overview", page_icon=None, layout="wide")
 
+# Get current persona from session state
+selected_persona = st.session_state.get("selected_persona", "executive")
+persona_info = get_persona_info(selected_persona)
+section_insights = get_section_insights("business_overview", selected_persona)
+
 # Sidebar - Executive Controls & Navigation
 st.sidebar.markdown("## **Executive Controls**")
+
+# Show current persona
+st.sidebar.markdown(
+    f"""
+<div style="background: {persona_info['color']}; padding: 10px; border-radius: 8px; color: white; margin-bottom: 15px;">
+    <strong>Viewing as: {persona_info['role']}</strong>
+</div>
+""",
+    unsafe_allow_html=True,
+)
 
 # Global Settings Section
 st.sidebar.markdown("### **Dashboard Settings**")
@@ -27,10 +43,10 @@ refresh_interval = st.sidebar.selectbox(
     index=2,
 )
 
-show_ai_insights = st.sidebar.checkbox(" Enable AI Insights", value=True)
-show_alerts = st.sidebar.checkbox(" Show Priority Alerts", value=True)
+show_ai_insights = st.sidebar.checkbox("Enable AI Insights", value=True)
+show_alerts = st.sidebar.checkbox("Show Priority Alerts", value=True)
 executive_mode = st.sidebar.checkbox(
-    " Executive Mode", value=True, help="Simplified view for C-suite"
+    "Executive Mode", value=True, help="Simplified view for C-suite"
 )
 
 # Time Range Filter
@@ -65,30 +81,42 @@ performance_threshold = st.sidebar.slider(
 
 # Quick Navigation
 st.sidebar.markdown("### **Quick Navigation**")
-if st.sidebar.button(" AI-Powered Insights →", use_container_width=True):
+if st.sidebar.button("AI-Powered Insights", use_container_width=True):
     st.switch_page("pages/02_AI_Powered_Insights.py")
 
-if st.sidebar.button(" Analytics Deep Dive →", use_container_width=True):
+if st.sidebar.button("Analytics Deep Dive", use_container_width=True):
     st.switch_page("pages/03_Analytics_Deep_Dive.py")
 
-if st.sidebar.button(" Real-Time Intelligence →", use_container_width=True):
+if st.sidebar.button("Real-Time Intelligence", use_container_width=True):
     st.switch_page("pages/04_Real_Time_Intelligence.py")
 
-if st.sidebar.button(" Advanced Capabilities →", use_container_width=True):
+if st.sidebar.button("Advanced Capabilities", use_container_width=True):
     st.switch_page("pages/05_Advanced_Capabilities.py")
 
 # Export Options
 st.sidebar.markdown("### **Export Options**")
-if st.sidebar.button(" Export Executive Summary", use_container_width=True):
+if st.sidebar.button("Export Executive Summary", use_container_width=True):
     st.sidebar.success("Executive summary exported!")
 
-if st.sidebar.button(" Export KPI Dashboard", use_container_width=True):
+if st.sidebar.button("Export KPI Dashboard", use_container_width=True):
     st.sidebar.success("KPI dashboard exported!")
 
 # Page header for Business Overview only
 st.markdown("# Business Overview")
 st.caption(
-    " **AI-Powered Executive Dashboard | Real-time insights with Snowflake Cortex Intelligence**"
+    f"**AI-Powered Executive Dashboard** | Personalized for: {persona_info['name']}"
+)
+
+# Persona-specific insights banner
+st.markdown(
+    f"""
+<div style="background: linear-gradient(135deg, {persona_info['color']} 0%, {persona_info['color']}99 100%);
+     padding: 15px 20px; border-radius: 10px; color: white; margin-bottom: 20px;">
+    <strong>Your Focus:</strong> {', '.join(section_insights.get('primary_metrics', []))}
+    <br><small>Data Sources: {', '.join(section_insights.get('data_sources', []))}</small>
+</div>
+""",
+    unsafe_allow_html=True,
 )
 
 # Professional tile CSS
@@ -132,24 +160,24 @@ try:
     tiles_html = f"""
     <div class='tile-grid'>
         <div class='tile blue'>
-            <h3> Total Clients</h3>
+            <h3>Total Clients</h3>
             <p>{total_clients}</p>
-            <small class='delta-up'>↗ Healthy growth</small>
+            <small class='delta-up'>Healthy growth</small>
         </div>
         <div class='tile purple'>
-            <h3> Total AUM</h3>
+            <h3>Total AUM</h3>
             <p>{total_aum}</p>
-            <small class='delta-up'>↗ Above forecast</small>
+            <small class='delta-up'>Above forecast</small>
         </div>
         <div class='tile green'>
-            <h3> Avg Portfolio</h3>
+            <h3>Avg Portfolio</h3>
             <p>{avg_portfolio}</p>
-            <small class='delta-up'>↗ Optimization impact</small>
+            <small class='delta-up'>Optimization impact</small>
         </div>
         <div class='tile red'>
-            <h3> YTD Growth</h3>
+            <h3>YTD Growth</h3>
             <p>{ytd_text}</p>
-            <small class='delta-up'>↗ Cortex forecast improving</small>
+            <small class='delta-up'>Cortex forecast improving</small>
         </div>
     </div>
     """
@@ -157,42 +185,53 @@ try:
 except Exception:
     pass
 
+# Persona-specific Key Insights Section
+st.markdown("---")
+st.markdown(f"### **Key Insights for {persona_info['role']}**")
+
+key_insights = section_insights.get("key_insights", [])
+if key_insights:
+    insight_cols = st.columns(len(key_insights))
+    for i, insight in enumerate(key_insights):
+        with insight_cols[i]:
+            st.info(insight)
+
 # AI-Powered Executive Summary
 st.markdown("### **AI-Generated Executive Summary**")
 
 # Executive summary with bullet points
 with st.container():
-    st.success(" **Cortex AI Intelligence Report** - Generated in real-time")
+    st.success("**Cortex AI Intelligence Report** - Generated in real-time")
 
     col1, col2 = st.columns(2)
 
     with col1:
         st.markdown(
             """
-       ** Market Performance & Growth**
-        • **AUM Growth**: +5.7% YTD indicating strong market positioning
-        • **Client Acquisition**: 127 new accounts adding $23M in assets
-        • **Performance**: Growth portfolios outperforming by 3.2%
+        **Market Performance & Growth**
+        - **AUM Growth**: +5.7% YTD indicating strong market positioning
+        - **Client Acquisition**: 127 new accounts adding $23M in assets
+        - **Performance**: Growth portfolios outperforming by 3.2%
 
-       ** Risk Management Excellence**
-        • **Portfolio Drift**: Prevented $8.3M potential losses across 127 portfolios
-        • **Compliance**: 98.3% adherence to suitability requirements
-        • **Early Warning**: 12 churn risks identified with intervention plans
+        **Risk Management Excellence**
+        - **Portfolio Drift**: Prevented $8.3M potential losses across 127 portfolios
+        - **Compliance**: 98.3% adherence to suitability requirements
+        - **Early Warning**: 12 churn risks identified with intervention plans
         """
         )
 
     with col2:
         st.markdown(
             """
-       **Client & Advisor Optimization**
-        • **Client Retention**: 94.2% retention rate exceeding industry average
-        • **Advisor Productivity**: 15% improvement through AI workflow optimization
-        • **Engagement**: $12M AUM preserved through proactive churn prevention
+        **Client & Advisor Optimization**
+        - **Client Retention**: 94.2% retention rate exceeding industry average
+        - **Advisor Productivity**: 15% improvement through AI workflow optimization
+        - **Engagement**: $12M AUM preserved through proactive churn prevention
 
-       ** Revenue Opportunities**
-        • **Idle Cash**: $47M identified for sweep programs
-        • **Revenue Potential**: $1.8M estimated annual revenue from optimization
-        • **Cross-sell Pipeline**: 23 high-probability opportunities identified
+        **Revenue Opportunities**
+        - **Idle Cash**: $47M identified for sweep programs
+        - **Revenue Potential**: $1.8M estimated annual revenue from optimization
+        - **Cross-sell Pipeline**: 23 high-probability opportunities identified
         """
         )
 
@@ -206,26 +245,26 @@ if global_kpis and len(global_kpis) > 0:
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
         st.metric(
-            " Total Clients",
+            "Total Clients",
             f"{kpi_data.get('num_clients', 0):,}",
             delta="+127 (AI Predicted Growth)",
         )
     with col2:
         st.metric(
-            " Total AUM",
+            "Total AUM",
             f"${kpi_data.get('aum', 0):,.0f}",
             delta="+2.3% (Above Forecast)",
         )
     with col3:
         avg_portfolio = kpi_data.get("aum", 0) / max(kpi_data.get("num_clients", 1), 1)
         st.metric(
-            " Avg Portfolio",
+            "Avg Portfolio",
             f"${avg_portfolio:,.0f}",
             delta="+5.7% (AI Optimized)",
         )
     with col4:
         st.metric(
-            " Active Advisors",
+            "Active Advisors",
             f"{kpi_data.get('num_advisors', 0):,}",
             delta="98% Productivity Score",
         )
@@ -233,7 +272,7 @@ if global_kpis and len(global_kpis) > 0:
         ytd_growth = kpi_data.get("ytd_growth_pct")
         if ytd_growth is not None:
             st.metric(
-                " YTD Growth",
+                "YTD Growth",
                 f"{ytd_growth*100:.1f}%",
                 delta="Cortex Forecast: +8.2%",
             )
@@ -260,11 +299,11 @@ with tile1:
 
         st.markdown(
             """
-       ** Immediate Action Required:**
-        • Portfolio concentration breaches (3)
-        • Suitability drift alerts (2)
-        • Large withdrawal pending ($2.3M)
-        • KYC expiration (5 days)
+        **Immediate Action Required:**
+        - Portfolio concentration breaches (3)
+        - Suitability drift alerts (2)
+        - Large withdrawal pending ($2.3M)
+        - KYC expiration (5 days)
         """
         )
 
@@ -274,17 +313,17 @@ with tile2:
             '<div style="background: linear-gradient(135deg, #ffa500, #ffb347); padding: 20px; border-radius: 10px; color: white; text-align: center; margin-bottom: 10px;">',
             unsafe_allow_html=True,
         )
-        st.markdown("### 🟡 **Strategic Opportunities**")
+        st.markdown("### **Strategic Opportunities**")
         st.markdown("**16 Items**")
         st.markdown("</div>", unsafe_allow_html=True)
 
         st.markdown(
             """
-       ** Growth Opportunities:**
-        • HNW client engagement gaps (8)
-        • Portfolio rebalancing optimal (4)
-        • Life event triggers (3)
-        • Cash optimization ($5.2M)
+        **Growth Opportunities:**
+        - HNW client engagement gaps (8)
+        - Portfolio rebalancing optimal (4)
+        - Life event triggers (3)
+        - Cash optimization ($5.2M)
         """
         )
 
@@ -294,17 +333,17 @@ with tile3:
             '<div style="background: linear-gradient(135deg, #90ee90, #98fb98); padding: 20px; border-radius: 10px; color: #2d5a2d; text-align: center; margin-bottom: 10px;">',
             unsafe_allow_html=True,
         )
-        st.markdown("### 🟢 **Performance Wins**")
+        st.markdown("### **Performance Wins**")
         st.markdown("**342 Items**")
         st.markdown("</div>", unsafe_allow_html=True)
 
         st.markdown(
             """
-       ** Success Metrics:**
-        • Portfolios in optimal range (89%)
-        • Client satisfaction high (94.2%)
-        • Compliance adherence (98.3%)
-        • Revenue targets exceeded (+12%)
+        **Success Metrics:**
+        - Portfolios in optimal range (89%)
+        - Client satisfaction high (94.2%)
+        - Compliance adherence (98.3%)
+        - Revenue targets exceeded (+12%)
         """
         )
 
@@ -320,11 +359,11 @@ with tile4:
 
         st.markdown(
             """
-       ** Cortex Intelligence:**
-        • Market sentiment: Positive (+0.73)
-        • Ultra HNW growth (+12.7%)
-        • Advisor productivity (+15%)
-        • Revenue forecast: $3.2M opportunity
+        **Cortex Intelligence:**
+        - Market sentiment: Positive (+0.73)
+        - Ultra HNW growth (+12.7%)
+        - Advisor productivity (+15%)
+        - Revenue forecast: $3.2M opportunity
         """
         )
 
@@ -336,38 +375,38 @@ st.markdown("### **AI-Enhanced Business Intelligence**")
 intelligence_col1, intelligence_col2, intelligence_col3 = st.columns(3)
 
 with intelligence_col1:
-    st.markdown("** Smart Actions (Next 24 Hours)**")
+    st.markdown("**Smart Actions (Next 24 Hours)**")
     if st.button("Generate AI Action Plan", use_container_width=True):
-        st.success(" AI Action Plan Generated!")
+        st.success("AI Action Plan Generated!")
         st.markdown(
             """
-       **Priority 1**: Contact 3 high-risk churn clients
-       **Priority 2**: Execute portfolio rebalancing (Auto-approved)
-       **Priority 3**: Deploy cash sweep campaigns (AI-optimized)
+        **Priority 1**: Contact 3 high-risk churn clients
+        **Priority 2**: Execute portfolio rebalancing (Auto-approved)
+        **Priority 3**: Deploy cash sweep campaigns (AI-optimized)
         """
         )
 
 with intelligence_col2:
-    st.markdown("** Cortex Analytics Digest**")
+    st.markdown("**Cortex Analytics Digest**")
     if st.button("Run Daily AI Analysis", use_container_width=True):
-        st.info(" Daily Intelligence Report Ready!")
+        st.info("Daily Intelligence Report Ready!")
         st.markdown(
             """
-       **Market Trends**: Equities outperforming (+3.2%)
-       **Client Behavior**: Increased trading activity (+15%)
-       **Risk Factors**: Weather-related concerns in FL/CA
+        **Market Trends**: Equities outperforming (+3.2%)
+        **Client Behavior**: Increased trading activity (+15%)
+        **Risk Factors**: Weather-related concerns in FL/CA
         """
         )
 
 with intelligence_col3:
-    st.markdown("** Predictive Insights**")
+    st.markdown("**Predictive Insights**")
     if st.button("Generate Forecasts", use_container_width=True):
-        st.success(" AI Predictions Updated!")
+        st.success("AI Predictions Updated!")
         st.markdown(
             """
-       **Q4 Forecast**: +6.2% AUM growth (85% confidence)
-       **Churn Risk**: 12 clients requiring intervention
-       **Revenue Opportunity**: $3.2M from optimization
+        **Q4 Forecast**: +6.2% AUM growth (85% confidence)
+        **Churn Risk**: 12 clients requiring intervention
+        **Revenue Opportunity**: $3.2M from optimization
         """
         )
 
@@ -391,19 +430,19 @@ with demo_col1:
         # Simulate AI_COMPLETE response
         ai_responses = {
             "What are the top 3 risks in my portfolio right now?": """
-           **Risk Analysis (Cortex AI):**
+            **Risk Analysis (Cortex AI):**
             1. **Concentration Risk**: 3 portfolios exceed 30% single-asset allocation
             2. **Suitability Drift**: 2 conservative clients in aggressive strategies
             3. **Liquidity Risk**: $12M in illiquid positions during volatile period
             """,
             "Which clients should I contact today?": """
-           **Priority Outreach (Cortex AI):**
+            **Priority Outreach (Cortex AI):**
             1. **Sarah Chen** - Life event trigger (new baby)
             2. **Michael Torres** - 187 days since last contact
             3. **Jennifer Wu** - Portfolio down 8.3%, needs reassurance
             """,
             "Summarize market performance": """
-           **Market Summary (Cortex AI):**
+            **Market Summary (Cortex AI):**
             - **Equities**: +5.7% YTD, momentum building
             - **Fixed Income**: Stable amid rate uncertainties
             - **Alternative Assets**: Outperforming at +8.2%
@@ -413,14 +452,14 @@ with demo_col1:
         response = ai_responses.get(
             user_question,
             """
-       **Cortex AI Analysis:**
+        **Cortex AI Analysis:**
         Based on current data patterns, I recommend focusing on client engagement
         and portfolio optimization. Key metrics show positive momentum with selective
         opportunities for immediate action.
         """,
         )
 
-        st.success(" **Cortex AI Response:**")
+        st.success("**Cortex AI Response:**")
         st.markdown(response)
 
 with demo_col2:
@@ -438,14 +477,14 @@ with demo_col2:
         sentiment_score = 0.87  # Positive sentiment
 
         if sentiment_score > 0.5:
-            st.success(f" **Positive Sentiment**: {sentiment_score:.2f}")
+            st.success(f"**Positive Sentiment**: {sentiment_score:.2f}")
             st.markdown(
                 "**Key Themes**: Satisfaction, Trust, Performance, Service Quality"
             )
         elif sentiment_score < -0.5:
-            st.error(f" **Negative Sentiment**: {sentiment_score:.2f}")
+            st.error(f"**Negative Sentiment**: {sentiment_score:.2f}")
         else:
-            st.info(f" **Neutral Sentiment**: {sentiment_score:.2f}")
+            st.info(f"**Neutral Sentiment**: {sentiment_score:.2f}")
 
 # Cortex-Powered Visualizations
 st.divider()
@@ -470,7 +509,7 @@ with viz_col1:
         aum_trend,
         x="Month",
         y=["AUM", "AI_Forecast"],
-        title=" AUM Growth: Actual vs AI Forecast",
+        title="AUM Growth: Actual vs AI Forecast",
         labels={"value": "AUM ($ Millions)", "variable": "Data Type"},
     )
     fig_trend.update_traces(line=dict(dash="dash"), selector=dict(name="AI_Forecast"))
@@ -485,7 +524,7 @@ with viz_col2:
         fig_segments = px.pie(
             values=segment_counts.values,
             names=segment_counts.index,
-            title=" AI-Optimized Client Segmentation",
+            title="AI-Optimized Client Segmentation",
         )
         st.plotly_chart(fig_segments, use_container_width=True)
 
@@ -516,8 +555,8 @@ st.divider()
 st.markdown(
     """
 ### **Demo Navigation Flow**
-- **Next**:  AI-Powered Insights - Deep dive into Cortex AI capabilities
-- **Then**:  Analytics Deep Dive - Advanced portfolio analytics
-- **Final**:  Real-Time Intelligence &  Advanced Capabilities
+- **Next**: AI-Powered Insights - Deep dive into Cortex AI capabilities
+- **Then**: Analytics Deep Dive - Advanced portfolio analytics
+- **Final**: Real-Time Intelligence & Advanced Capabilities
 """
 )

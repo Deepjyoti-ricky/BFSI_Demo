@@ -12,8 +12,15 @@ import plotly.express as px
 import streamlit as st
 
 from utils.data_functions import get_sentiment_analysis
+from utils.personas import get_persona_info, get_section_insights
 
 st.set_page_config(page_title="AI-Powered Insights", page_icon=None, layout="wide")
+
+# Get current persona from session state
+selected_persona = st.session_state.get("selected_persona", "executive")
+persona_info = get_persona_info(selected_persona)
+section_insights = get_section_insights("ai_insights", selected_persona)
+
 
 # Sidebar - AI Configuration & Settings
 st.sidebar.markdown("## **AI Configuration**")
@@ -75,6 +82,20 @@ st.markdown("# AI-Powered Insights")
 st.caption(
     " **Snowflake Cortex AI in Action | Live demonstrations of enterprise AI capabilities**"
 )
+
+# Persona-specific insights banner
+st.markdown(
+    f"""
+<div style="background: linear-gradient(135deg, {persona_info['color']} 0%, {persona_info['color']}99 100%);
+     padding: 15px 20px; border-radius: 10px; color: white; margin-bottom: 20px;">
+    <strong>Viewing as: {persona_info['name']}</strong> |
+    <strong>Focus:</strong> {', '.join(section_insights.get('primary_metrics', []))}
+    <br><small>Data Sources: {', '.join(section_insights.get('data_sources', []))}</small>
+</div>
+""",
+    unsafe_allow_html=True,
+)
+
 
 # Cortex AI Feature Showcase
 st.markdown("### **Snowflake Cortex AI Feature Demonstrations**")
